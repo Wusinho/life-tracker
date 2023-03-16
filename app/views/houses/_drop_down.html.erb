@@ -2,24 +2,27 @@
 
   <div class="d-flex nav__container--session justify-content-between">
 
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Create a House
-    </button>
-    <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Create a House
+      </button>
+      <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+        <p>
+          <%= house.inspect %>
+        </p>
 
-        <%= form_with(model: house ) do |f| %>
-          <div class="field">
-            <%= f.label 'House name' %><br />
-            <%= f.text_field :name, autocomplete: "new-password" %>
-          </div>
+          <%= form_with(model: house ) do |f| %>
+            <div class="field">
+              <%= f.label 'House name' %><br />
+              <%= f.text_field :name, autocomplete: "new-name" %>
+            </div>
 
-          <div class="actions">
-            <%= f.submit "House up", class: blue_btn %>
-          </div>
-        <% end %>
-    </ul>
+            <div class="actions">
+              <%= f.submit "House up", class: blue_btn %>
+            </div>
+          <% end %>
+      </ul>
+    </div>
+
   </div>
-
-</div>
-      <% end %>
+<% end %>
