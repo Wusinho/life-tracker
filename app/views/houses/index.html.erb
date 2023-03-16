@@ -1,8 +1,6 @@
 
 
-<%= turbo_frame_tag 'house_name' do %>
-
-  <% end %>
+<%= turbo_frame_tag 'house_name' %>
 
 <% if current_user.house.present? %>
     <%= render 'house_name', house_name: current_user.house.name %>
