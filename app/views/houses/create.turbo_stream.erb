@@ -1,11 +1,3 @@
-<%= turbo_stream.append "house_name" do %>
-  <%#= turbo_frame_tag 'house_name' do %>
-    <%#= render 'house_name', house_name: current_user.house.name %>
-  <%# end %>
-
-  <h2>Hello</h2>
-<% end %>
-
 
   <%= turbo_stream.replace "house_form" do %>
     <%= turbo_frame_tag 'house_form' do %>
