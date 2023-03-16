@@ -8,9 +8,10 @@ class HousesController < ApplicationController
     @house = current_user.build_house(house_params)
 
     if @house.save
-      p @house
+      render turbo_stream: turbo_stream.replace('house_form', partial: 'houses/house_name', locals: { house_name: @house.name })
     else
-      p @house.errors.full_messages
+      render turbo_stream: turbo_stream.replace('error_message', partial: 'shared/error_message',
+                                                locals: { message: @house.errors.full_messages.to_sentence })
     end
 
   end
