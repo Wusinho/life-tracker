@@ -4,7 +4,9 @@
       <%= link_to current_user.nickname, root_path, class: "navbar-brand"  %>
       <div class="d-flex">
         <%#= render 'shared/friends_request', requests: current_user.pending_invitations %>
-        <%#= render 'shared/friends_list', friends: current_user.friends %>
+        <% if current_user.house.blank? %>
+          <%= render 'houses/drop_down', house: @house %>
+        <% end %>
         <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-danger'%>
       </div>
     <%else %>
