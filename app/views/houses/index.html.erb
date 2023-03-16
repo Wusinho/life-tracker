@@ -1,10 +1,12 @@
 
 
+<%= turbo_frame_tag 'house_name' do%>
 
-<% if current_user.house.present? %>
+  <% if current_user.house.present? %>
     <%= render 'house_name', house_name: current_user.house.name %>
-  <% else %>
-  <%= turbo_frame_tag 'house_name' %>
+  <% end %>
+
 <% end %>
+
 
 <%= turbo_frame_tag 'game' %>
