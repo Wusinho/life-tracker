@@ -1,8 +1,13 @@
 class GamesController < ApplicationController
   before_action :set_house, only: [:create]
+  before_action :set_game, only: [:show]
+
+  def index
+    @games = Game.all.where(ended: false)
+  end
 
   def show
-
+    @player = Player.find_or_create_by(user_id: current_user.id, game_id: @game.id)
   end
 
   def create
@@ -27,6 +32,10 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def set_game
+    @game = Game.find(params['id'])
+  end
 
   def set_house
     @house = House.find(params['id'])

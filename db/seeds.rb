@@ -12,6 +12,6 @@ password = '123456'
     email: "user_#{i}@gmail.com",
     password: password,
     password_confirmation: password,
-    nickname: "user_#{i}"
+    nickname: Faker::Fantasy::Tolkien.character + Faker::Fantasy::Tolkien.race
   )
 end

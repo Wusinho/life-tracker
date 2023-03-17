@@ -14,12 +14,16 @@
         <%= render 'edit_drop_down', house: @house %>
       <% end %>
 
-      <%= render 'games/form', house: @house %>
-    <% else %>
-  <%= turbo_frame_tag 'house_form' do %>
+      <% if @house.games.blank? %>
+          <%= render 'games/form', house: @house %>
+      <% else %>
+        <%=link_to @house.name, game_path(@game) %>
+      <% end %>
 
-      <%= render 'form', house: @new_house %>
-  <% end %>
+    <% else %>
+      <%= turbo_frame_tag 'house_form' do %>
+         <%= render 'form', house: @new_house %>
+      <% end %>
 
     <% end %>
 

@@ -4,6 +4,9 @@ class HousesController < ApplicationController
   def index
     @new_house = House.new
     @house = current_user.house
+    if @house
+      @game = @house.games.find_by(ended: false)
+    end
   end
 
   def edit; end

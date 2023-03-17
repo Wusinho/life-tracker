@@ -1,8 +1,10 @@
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid px-4">
     <% if user_signed_in? %>
-      <%= link_to current_user.nickname, root_path, class: "navbar-brand"  %>
-      <%= link_to 'Edit Profile', edit_user_registration_path, class: 'navbar-brand' %>
+      <%= link_to current_user.nickname, edit_user_registration_path, class: 'navbar-brand' %>
+      <%= link_to 'Games', games_path, class: 'navbar-brand' %>
+      <%= link_to 'House', root_path, class: 'navbar-brand' %>
+
       <div class="d-flex">
         <%#= render 'shared/friends_request', requests: current_user.pending_invitations %>
 
