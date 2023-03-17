@@ -2,7 +2,8 @@ class HousesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_house, only: [:edit, :update]
   def index
-    @house = current_user.house || House.new
+    @house = current_user.house
+    @active_game = @house.games.find_by(ended: true)
   end
 
   def edit; end

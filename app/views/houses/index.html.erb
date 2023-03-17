@@ -13,3 +13,12 @@
 
 
 <% end %>
+
+
+<%= turbo_frame_tag 'players' do %>
+  <% if @active_game %>
+    <%= render 'games/users' %>
+  <% else %>
+    <%= render 'games/form', house: @house %>
+  <% end %>
+<% end %>
