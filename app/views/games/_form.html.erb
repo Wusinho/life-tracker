@@ -1,4 +1,1 @@
-<%= button_to 'Create Game', games_path({id: house.id}), method: :post, data: {
-  controller: 'add-player',
-  action: 'add-player#click'
-} %>
+<%= link_to 'Create Game', games_path({id: house.id}), class: green_btn %>

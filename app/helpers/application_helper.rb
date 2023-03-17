@@ -15,6 +15,10 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def new_house
+    @new_house ||= House.new
+  end
+
   def blue_btn
     'btn btn-primary'
   end

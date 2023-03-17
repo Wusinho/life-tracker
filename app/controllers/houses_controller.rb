@@ -3,7 +3,6 @@ class HousesController < ApplicationController
   before_action :set_house, only: [:edit, :update]
   def index
     @house = current_user.house || House.new
-    @game = Game.new
   end
 
   def edit; end

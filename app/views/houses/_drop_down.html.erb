@@ -8,7 +8,7 @@
       </button>
       <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
 
-          <%= form_with(model: house ) do |f| %>
+          <%= form_for( new_house ) do |f| %>
             <div class="field">
               <%= f.label 'House name' %><br />
               <%= f.text_field :name, autocomplete: "new-name" %>

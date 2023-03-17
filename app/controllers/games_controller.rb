@@ -3,14 +3,19 @@ class GamesController < ApplicationController
 
   def create
     @game = @house.games.build
-    if @game.save
-      p '*'*100
-      p @game
-    else
-      p '*'*100
-      p @game.errors.messages
-      p '*'*100
+
+    respond_to do |format|
+
+      if @game.save
+        format.turbo_stream
+        format.html
+      else
+        p '*'*100
+        p @game.errors.messages
+
+      end
     end
+
   end
 
   def update
