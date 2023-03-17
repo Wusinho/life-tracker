@@ -1,20 +1,24 @@
 class GamesController < ApplicationController
   before_action :set_house, only: [:create]
 
+  def show
+
+  end
+
   def create
     @game = @house.games.build
 
-    respond_to do |format|
 
       if @game.save
-        format.turbo_stream
-        format.html
+        respond_to do |format|
+          format.html { redirect_to @game }
+        end
+
       else
         p '*'*100
         p @game.errors.messages
 
       end
-    end
 
   end
 

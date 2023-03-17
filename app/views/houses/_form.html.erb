@@ -1,0 +1,10 @@
+<%= form_with(model: house ) do |f| %>
+  <div class="field">
+    <%= f.label 'House name' %><br />
+    <%= f.text_field :name, autocomplete: "new-name" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "New House", class: blue_btn %>
+  </div>
+<% end %>

@@ -3,15 +3,11 @@
     <%= turbo_frame_tag 'house_form' do %>
     <%= render 'houses/edit_drop_down', house: @house %>
     <% end %>
-
   <% end %>
 
 
   <%= turbo_stream.replace "game" do %>
-    <%= turbo_frame_tag 'game' do %>
       <%= render 'games/form', house: @house %>
-    <% end %>
-
   <% end %>
 
 
