@@ -6,6 +6,5 @@ export default class extends Controller {
   }
 
   click(e){
-    console.log(e.target)
   }
 }

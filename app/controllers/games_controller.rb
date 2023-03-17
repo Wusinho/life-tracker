@@ -8,6 +8,13 @@ class GamesController < ApplicationController
 
   def show
     @player = Player.find_or_create_by(user_id: current_user.id, game_id: @game.id)
+    ActionCable.server.broadcast "players_channel_#{@player.user.id}",
+                                 {
+                                   player: @player.id,
+                                   element: ApplicationController.render(partial: 'games/player', locals: { player: @player, user: @player.user}),
+                                 }
+
+
   end
 
   def create
