@@ -1,5 +1,6 @@
 class House < ApplicationRecord
   belongs_to :user
+  has_many :games
 
   validates_presence_of :name
 

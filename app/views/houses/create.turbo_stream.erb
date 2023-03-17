@@ -7,6 +7,13 @@
   <% end %>
 
 
+  <%= turbo_stream.replace "game" do %>
+    <%= turbo_frame_tag 'game' do %>
+      <%= render 'games/form', house: @house %>
+    <% end %>
+
+  <% end %>
+
 
 
 
