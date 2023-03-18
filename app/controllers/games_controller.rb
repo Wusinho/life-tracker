@@ -1,15 +1,13 @@
 class GamesController < ApplicationController
   # before_action :set_house, only: [:create]
   before_action :set_game, only: [:show, :show, :destroy]
+  before_action :is_invited?, only: [:show]
 
   def index
     @games = Game.all.where(ended: false)
   end
 
   def show
-    @players = @game.players
-    redirect_to games_path if @players.include?(current_user)
-
     @game_owner = current_user.game_owner?(@game)
   end
 
@@ -35,8 +33,15 @@ class GamesController < ApplicationController
 
   private
 
+  def is_invited?
+    return if @players.find_by(user_id: current_user.id)
+
+    error_message('You are not invited')
+  end
+
   def set_game
     @game = Game.find(params['id'])
+    @players = @game.players
   end
 
   def set_house

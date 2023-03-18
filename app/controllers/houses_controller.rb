@@ -22,7 +22,7 @@ class HousesController < ApplicationController
           format.html
         end
       else
-        render turbo_stream: error_message(@house)
+        error_message(@house)
       end
   end
 
@@ -30,7 +30,7 @@ class HousesController < ApplicationController
     if @house.update(house_params)
       redirect_to houses_path
     else
-      render turbo_stream: error_message(@house)
+      error_message(@house)
     end
   end
 

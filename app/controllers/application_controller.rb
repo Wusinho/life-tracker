@@ -9,8 +9,10 @@ class ApplicationController < ActionController::Base
 
 
   def error_message(house)
-    turbo_stream.replace('error_message', partial: 'shared/error_message',
-                         locals: { message: house.errors.full_messages.to_sentence })
+    message = house.instance_of?(String) ? house : house.errors.full_messages.to_sentence
+
+    render turbo_stream: turbo_stream.replace('error_message', partial: 'shared/error_message',
+                         locals: { message: message })
   end
 
   def update_online_status(action)
