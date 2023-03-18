@@ -3,6 +3,8 @@ class CreatePlayers < ActiveRecord::Migration[7.0]
     create_table :players, id: :uuid do |t|
       t.integer :position
       t.boolean :winner, default: false
+      t.integer :lives, default: 20
+      t.string :killer
       t.references :user, null: false, foreign_key: true, type: :uuid
       t.references :game, null: false, foreign_key: true, type: :uuid
 

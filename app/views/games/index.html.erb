@@ -1,4 +1,6 @@
 
+<%= turbo_stream_from 'games' %>
 
-
-<%= render @games %>
+<%= turbo_frame_tag 'games' do %>
+  <%= render @games %>
+<% end %>
