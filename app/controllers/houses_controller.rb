@@ -27,9 +27,7 @@ class HousesController < ApplicationController
 
   def update
     if @house.update(house_params)
-      respond_to do |format|
-        format.html { redirect_to houses_path }
-      end
+      redirect_to houses_path
     else
       render turbo_stream: error_message(@house)
     end

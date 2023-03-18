@@ -9,9 +9,7 @@
   <% end %>
 
 
-  <% if @house %>
-    <%#= link_to 'Create Game', house_path(@house) %>
-  <% else %>
+  <% unless @house %>
     <%= turbo_frame_tag 'house_form' do %>
       <%= render 'form', house: @new_house %>
     <% end %>
