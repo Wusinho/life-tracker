@@ -11,4 +11,14 @@ class User < ApplicationRecord
     self.house.games.find_by(ended: false).present?
   end
 
+  def has_house?
+    self.house.present?
+  end
+
+  def game_owner?(game)
+    return unless has_house?
+
+    self.house.games.where(id: game.id).present?
+  end
+
 end
