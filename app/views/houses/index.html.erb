@@ -1,39 +1,15 @@
 
-<%= turbo_stream_from 'houses' %>
+  <%= turbo_stream_from 'houses' %>
 
-
-  <% if current_user.house.present? %>
   <%= turbo_frame_tag 'houses' do %>
-
-      <%= render @house %>
+    <%= render @house if @house %>
   <% end %>
-  <%= link_to 'Create Game', house_path(@house) %>
 
+  <% if @house %>
+    <%#= link_to 'Create Game', house_path(@house) %>
+  <% else %>
+    <%= turbo_frame_tag 'house_form' do %>
+      <%= render 'form', house: @new_house %>
     <% end %>
+  <% end %>
 
-
-
-    <% if @house %>
-      <%#= turbo_frame_tag 'house_form' do %>
-        <%#= render 'edit_drop_down', house: @house %>
-      <%# end %>
-
-      <%# if @house.games.blank? %>
-          <%#= render 'games/form', house: @house %>
-      <%# else %>
-        <%#=link_to @house.name, game_path(@game) %>
-      <%# end %>
-
-    <% else %>
-      <%= turbo_frame_tag 'house_form' do %>
-         <%= render 'form', house: @new_house %>
-      <% end %>
-
-    <% end %>
-
-
-
-<%#= turbo_frame_tag 'game' do %>
-  
-
-<%# end %>

@@ -1,3 +1,5 @@
 <div id="<%= dom_id(house) %>" >
   <h2>This is the house of <%= house.name %></h2>
 </div>
+
+<%= link_to 'Edit', edit_house_path(house) %>
