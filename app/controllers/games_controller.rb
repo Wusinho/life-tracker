@@ -8,6 +8,8 @@ class GamesController < ApplicationController
 
   def show
     @players = @game.players
+    redirect_to games_path if @players.include?(current_user)
+
     @game_owner = current_user.game_owner?(@game)
   end
 
@@ -45,7 +47,7 @@ class GamesController < ApplicationController
     params
       .require(:game)
       .permit(
-              players_attributes: [:user_id, :game_id, :_destroy]) # permit one-to-many fields
+              players_attributes: [:user_id, :game_id, :_destroy])
   end
 
 end
