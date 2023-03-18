@@ -31,4 +31,8 @@ module ApplicationHelper
     'btn btn-danger'
   end
 
+  def edit_btn
+    'fa fa-edit px-2'
+  end
+
 end

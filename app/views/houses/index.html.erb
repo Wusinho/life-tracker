@@ -1,17 +1,14 @@
 
   <%= turbo_stream_from 'houses' %>
 
-  <%= turbo_frame_tag 'houses' do %>
+  <%= turbo_frame_tag 'houses', class: 'house__container' do %>
     <% if @house %>
       <%= render @house %>
-      <%= link_to 'Edit', edit_house_path(@house) %>
-    <% end %>
-  <% end %>
-
-
-  <% unless @house %>
-    <%= turbo_frame_tag 'house_form' do %>
-      <%= render 'form', house: @new_house %>
+      <%= link_to '', edit_house_path(@house), class: edit_btn %>
+    <% else %>
+      <%= turbo_frame_tag 'house_form' do %>
+        <%= render 'form', house: @new_house %>
+      <% end %>
     <% end %>
   <% end %>
 
