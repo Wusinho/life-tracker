@@ -9,6 +9,10 @@ class HousesController < ApplicationController
     end
   end
 
+  def show
+    @house = current_user.house
+  end
+
   def edit; end
 
   def create
