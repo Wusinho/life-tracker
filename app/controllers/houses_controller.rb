@@ -37,7 +37,6 @@ class HousesController < ApplicationController
   private
 
   def set_creating_game
-    @house = current_user.house
     @game = Game.new
     @users = User.all
     @users.each { | user| @game.players.build(user_id: user.id) }

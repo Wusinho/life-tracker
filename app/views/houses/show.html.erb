@@ -1,8 +1,6 @@
 Players:
 
 <%= form_with model: @game do |form| %>
-      <%= form.hidden_field :house_id, value: @house.id %>
-
       <%= form.fields_for :players do |f| %>
         <li>
           <%= f.label :player %>

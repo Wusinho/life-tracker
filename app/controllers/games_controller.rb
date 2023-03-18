@@ -18,8 +18,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(game_params_for_create)
-
+    @game = current_user.house.games.build(game_params_for_create)
 
       if @game.save
         p '*'* 100
@@ -27,7 +26,7 @@ class GamesController < ApplicationController
         p '*'* 100
       else
         p '*'* 100
-        p @game.errors
+        p @game.errors.full_messages
         p '*'* 100
 
       end
@@ -51,7 +50,7 @@ class GamesController < ApplicationController
   def game_params_for_create
     params
       .require(:game)
-      .permit(:house_id,
+      .permit(
               players_attributes: [:user_id, :game_id, :_destroy]) # permit one-to-many fields
   end
 
