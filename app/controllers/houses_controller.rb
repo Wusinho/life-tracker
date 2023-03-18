@@ -1,13 +1,14 @@
 class HousesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_house, only: [:edit, :update]
+  before_action :set_house, only: [:edit, :update ]
+  before_action :set_creating_game, only: [:show ]
+
   def index
     @new_house = House.new
     @house = current_user.house
   end
 
   def show
-    @house = current_user.house
   end
 
   def edit; end
@@ -35,8 +36,12 @@ class HousesController < ApplicationController
 
   private
 
-
-
+  def set_creating_game
+    @house = current_user.house
+    @game = Game.new
+    @users = User.all
+    @users.each { | user| @game.players.build(user_id: user.id) }
+  end
 
   def set_house
     @house = current_user.house

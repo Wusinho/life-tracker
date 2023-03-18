@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_house, only: [:create]
+  # before_action :set_house, only: [:create]
   before_action :set_game, only: [:show]
 
   def index
@@ -18,17 +18,17 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = @house.games.build
+    @game = Game.new(game_params_for_create)
 
 
       if @game.save
-        respond_to do |format|
-          format.html { redirect_to @game }
-        end
-
+        p '*'* 100
+        p @game
+        p '*'* 100
       else
-        p '*'*100
-        p @game.errors.messages
+        p '*'* 100
+        p @game.errors
+        p '*'* 100
 
       end
 
@@ -46,6 +46,13 @@ class GamesController < ApplicationController
 
   def set_house
     @house = House.find(params['id'])
+  end
+
+  def game_params_for_create
+    params
+      .require(:game)
+      .permit(:house_id,
+              players_attributes: [:user_id, :game_id, :_destroy]) # permit one-to-many fields
   end
 
 end

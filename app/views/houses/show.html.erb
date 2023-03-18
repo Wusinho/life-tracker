@@ -1,0 +1,14 @@
+Players:
+
+<%= form_with model: @game do |form| %>
+      <%= form.hidden_field :house_id, value: @house.id %>
+
+      <%= form.fields_for :players do |f| %>
+        <li>
+          <%= f.label :player %>
+          <%= f.text_field :user_id %>
+        </li>
+      <% end %>
+
+  <%= form.submit class: blue_btn %>
+<% end %>
