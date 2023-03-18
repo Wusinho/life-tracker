@@ -1,6 +1,4 @@
 
-<%= turbo_stream_from 'games' %>
-
-<%= turbo_frame_tag 'games' do %>
+<div data-controller="game">
   <%= render @games %>
-<% end %>
+</div>

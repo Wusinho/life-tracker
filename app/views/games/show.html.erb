@@ -1,3 +1,10 @@
+
+<%= button_to 'delete',
+            { controller: "games", action: "destroy", id: @game.id },
+            data: { confirm: 'Are you sure?' },
+            method: :delete,
+            class: red_btn %>
 <% @players.each do |player| %>
  <%= render 'player', player: player %>
 <% end %>
+
