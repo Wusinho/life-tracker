@@ -1,14 +1,11 @@
 
-<%#= turbo_stream.remove "house_form" %>
 
-  <%= turbo_stream.replace "house_form" do %>
-    <%= render 'houses/link', house: @house %>
-  <% end %>
+<%= turbo_stream.remove "house_form" %>
 
+<%= turbo_stream.append 'houses' do %>
+  <%= render 'link', house: @house %>
+ <% end %>
 
-  <%#= turbo_stream.replace "game" do %>
-      <%#= render 'games/form', house: @house %>
-  <%# end %>
 
 
 

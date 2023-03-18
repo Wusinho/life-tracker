@@ -4,9 +4,6 @@ class HousesController < ApplicationController
   def index
     @new_house = House.new
     @house = current_user.house
-    if @house
-      @game = @house.games.find_by(ended: false)
-    end
   end
 
   def show
@@ -24,16 +21,24 @@ class HousesController < ApplicationController
           format.html
         end
       else
-        render turbo_stream: turbo_stream.replace('error_message', partial: 'shared/error_message',
-                                                  locals: { message: @house.errors.full_messages.to_sentence })
+        render turbo_stream: error_message(@house)
       end
   end
 
   def update
-    current_user.house.update(house_params)
+    if @house.update(house_params)
+      respond_to do |format|
+        format.html { redirect_to houses_path }
+      end
+    else
+      render turbo_stream: error_message(@house)
+    end
   end
 
   private
+
+
+
 
   def set_house
     @house = current_user.house

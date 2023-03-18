@@ -2,8 +2,12 @@
   <%= turbo_stream_from 'houses' %>
 
   <%= turbo_frame_tag 'houses' do %>
-    <%= render @house if @house %>
+    <% if @house %>
+      <%= render @house %>
+      <%= link_to 'Edit', edit_house_path(@house) %>
+    <% end %>
   <% end %>
+
 
   <% if @house %>
     <%#= link_to 'Create Game', house_path(@house) %>

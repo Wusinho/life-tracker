@@ -4,7 +4,11 @@
     <%= f.text_field :name %>
   </div>
 
-  <div class="actions">
+  <div class="actions mt-2">
     <%= f.submit class: blue_btn%>
   </div>
+<% end %>
+
+<% if house.persisted?  %>
+<%= link_to 'Back', houses_path %>
 <% end %>
