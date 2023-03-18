@@ -12,6 +12,12 @@
     <% end %>
   <% end %>
 
+  <%= turbo_frame_tag 'create_game' %>
 
+  <% if @house && !current_user.active_game? %>
+    <%= link_to 'Create Game', house_path(@house), class: green_btn %>
+  <% end %>
 
-  <%= link_to 'Create Game', house_path(@house) if @house %>
+  <div>
+    <%= link_to 'Go to Games', games_path %>
+  </div>

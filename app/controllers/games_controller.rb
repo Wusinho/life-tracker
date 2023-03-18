@@ -21,14 +21,9 @@ class GamesController < ApplicationController
     @game = current_user.house.games.build(game_params_for_create)
 
       if @game.save
-        p '*'* 100
-        p @game
-        p '*'* 100
+        redirect_to game_path @game
       else
-        p '*'* 100
-        p @game.errors.full_messages
-        p '*'* 100
-
+        render turbo_stream: error_message(@house)
       end
 
   end

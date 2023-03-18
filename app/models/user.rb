@@ -5,4 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :house
   has_many :games
+
+  def active_game?
+    return if self.house.games.empty?
+    self.house.games.find_by(ended: false).present?
+  end
+
 end
