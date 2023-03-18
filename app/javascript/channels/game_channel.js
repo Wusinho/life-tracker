@@ -1,6 +1,11 @@
 import consumer from "channels/consumer"
 
-consumer.subscriptions.create("GameChannel", {
+const game = (game_id, container) => consumer.subscriptions.create(
+    {
+      channel: "GameChannel",
+      user_id: game_id
+  },
+    "GameChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
   },
@@ -10,6 +15,12 @@ consumer.subscriptions.create("GameChannel", {
   },
 
   received(data) {
+      console.log(data)
+    let div = document.createElement('div')
+      div.innerHTML = data.element
+      container.prepend(div)
     // Called when there's incoming data on the websocket for this channel
   }
 });
+
+export default game;

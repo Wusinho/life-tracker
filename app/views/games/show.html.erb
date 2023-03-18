@@ -1,12 +1,15 @@
+<%= turbo_frame_tag 'games' do %>
 
-<% if @game_owner %>
+  <% if @game_owner %>
   <%= button_to 'delete',
             { controller: "games", action: "destroy", id: @game.id },
             data: { confirm: 'Are you sure?' },
             method: :delete,
             class: red_btn %>
   <% end %>
-<% @players.each do |player| %>
- <%= render 'player', player: player %>
+
+  <% @players.each do |player| %>
+   <%= render 'player', player: player %>
+  <% end %>
 <% end %>
 
