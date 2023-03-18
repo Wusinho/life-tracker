@@ -1,6 +1,4 @@
 
-<%= turbo_stream_from 'games' %>
-
-<%= turbo_frame_tag 'games' do %>
+<div data-controller="game" data-user-id="<%= current_user.id %>">
   <%= render @games %>
-<% end %>
+</div>

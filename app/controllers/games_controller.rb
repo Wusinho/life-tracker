@@ -8,7 +8,7 @@ class GamesController < ApplicationController
 
   def show
     @players = @game.players
-    @game_owner =current_user.game_owner?(@game)
+    @game_owner = current_user.game_owner?(@game)
   end
 
   def create

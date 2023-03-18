@@ -1,9 +1,9 @@
 class GameChannel < ApplicationCable::Channel
   def subscribed
-    if current_user && params[:game_id]
-      game = Game.find(params[:game_id])
-      stream_for game
-    end
+    p 'SUBSCRIBED'
+    return unless current_user && params[:user_id]
+
+    stream_from "game_channel_#{params[:user_id]}"
   end
 
   def unsubscribed
