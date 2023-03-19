@@ -15,7 +15,6 @@
     <i class="fa-solid fa-meteor"></i>
   <% end %>
 
-  <%= turbo_stream_from @game, :players %>
 <div id='players'>
   <% @players.each do |player| %>
     <div data-controller="players" data-player-id="<%= player.id %>">

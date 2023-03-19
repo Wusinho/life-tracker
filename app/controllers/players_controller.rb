@@ -44,7 +44,7 @@ class PlayersController < ApplicationController
   private
 
   def set_player
-    @player = Player.find(params[:id])
+    @player = Player.find_by(user_id: params[:id])
     @game = @player.game
   end
 end
