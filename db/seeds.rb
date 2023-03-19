@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 password = '123456'
 
-10.times do |i|
+6.times do |i|
   User.create(
     email: "user_#{i}@gmail.com",
     password: password,

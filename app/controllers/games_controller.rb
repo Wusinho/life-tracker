@@ -41,7 +41,7 @@ class GamesController < ApplicationController
 
   def set_game
     @game = Game.find(params['id'])
-    @players = @game.players
+    @players = @game.players.order(position: :asc )
   rescue
     redirect_to games_path
   end
