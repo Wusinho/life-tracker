@@ -2,10 +2,11 @@ Clickea para q no jueguen:
 
 <%= form_with model: @game do |form| %>
       <%= form.fields_for :players do |f| %>
-        <li>
+        <li class="my-2">
           <%= f.check_box :_destroy %>
           <%= f.label f.object.user.nickname %>
           <%= f.hidden_field :user_id, value: f.object.user_id %>
+          <%= f.select(:position, (1..@users.count).to_a) %>
         </li>
       <% end %>
 

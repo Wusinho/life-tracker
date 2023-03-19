@@ -42,6 +42,8 @@ class GamesController < ApplicationController
   def set_game
     @game = Game.find(params['id'])
     @players = @game.players
+  rescue
+    redirect_to games_path
   end
 
   def set_house
@@ -52,7 +54,7 @@ class GamesController < ApplicationController
     params
       .require(:game)
       .permit(
-              players_attributes: [:user_id, :game_id, :_destroy])
+              players_attributes: [:user_id, :game_id, :position, :_destroy])
   end
 
 end
