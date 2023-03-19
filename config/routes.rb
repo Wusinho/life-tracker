@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :games
   resources :profiles
   resources :houses
+  resources :players, only: [:update]
   # Defines the root path route ("/")
   root "houses#index"
 end

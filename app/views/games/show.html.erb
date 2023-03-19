@@ -7,7 +7,12 @@
             class: red_btn %>
   <% end %>
 
+  <h1>
+    <i class="fa-solid fa-meteor"></i>
+  </h1>
   <% @players.each do |player| %>
-   <%= render 'player', player: player %>
+    <div data-controller="players" data-player-id="<%= player.id %>">
+      <%= render 'player', player: player %>
+    </div>
   <% end %>
 

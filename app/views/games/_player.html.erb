@@ -1,7 +1,33 @@
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title"><%= player.user.nickname%></h5>
-    <h4><i class="fa-solid fa-heart"></i> <%= player.lives %></h4>
-    <h3> <%= player.position %></h3>
+    <div class="d-flex">
+
+      <%= link_to '', data: {
+                            controller: 'players',
+                            player_id: player.id,
+                            action: 'players#damage_to'
+      } do %>
+        <i class="fa-solid fa-heart-crack"></i>
+      <% end %>
+
+      <p class="px-3"><%= player.lives %> </p>
+
+      <%= link_to '', data: {
+                            controller: 'players',
+                            player_id: player.id,
+                            action: 'players#heal'
+      } do %>
+        <i class="fa-solid fa-heart"></i>
+      <% end %>
+
+    </div>
+    <%= link_to '', data: {
+                          controller: 'players',
+                          player_id: player.id,
+                          action: 'players#damage_to_enemies'
+    } do %>
+      <i class="fa-solid fa-cloud-rain"></i>
+    <% end %>
   </div>
 </div>
