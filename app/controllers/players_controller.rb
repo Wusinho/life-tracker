@@ -1,25 +1,43 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: [:damage_to_enemies]
+  before_action :set_player, only: [:damage_to_enemies, :heal, :damage_to, :kaboom]
 
+  def kaboom
+    @game.players.each do |player|
+
+      player.decrement!(:lives)
+    end
+
+    render json: {
+      player: current_user,
+    }
+  end
 
   def damage_to_enemies
+    @game.players.each do |player|
+      next if player.user == current_user
+
+      player.decrement!(:lives)
+    end
     render json: {
       player: @player,
-      game: @game
     }
   end
 
   def heal
+    @player.increment!(:lives)
     render json: {
       player: @player,
-      game: @game
+      lives: @player.lives,
+      user: @player.user.nickname
     }
   end
 
   def damage_to
+    @player.decrement!(:lives)
     render json: {
       player: @player,
-      game: @game
+      lives: @player.lives,
+      user: @player.user.nickname
     }
   end
 

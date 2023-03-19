@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   resources :houses
   resources :players, only: [] do
     post :damage_to_enemies, on: :collection
-    post :heal, on: :collection
-    post :damage_to, on: :collection
-
+    post :heal,              on: :collection
+    post :damage_to,         on: :collection
+    post :kaboom,            on: :collection
   end
   # Defines the root path route ("/")
   root "houses#index"

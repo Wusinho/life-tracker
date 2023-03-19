@@ -7,9 +7,14 @@
             class: red_btn %>
   <% end %>
 
-  <h1>
+  <%= link_to '', data: {
+                        controller: 'players',
+                        player_id: current_user.id,
+                        action: 'players#kaboom'
+  } do %>
     <i class="fa-solid fa-meteor"></i>
-  </h1>
+  <% end %>
+
   <% @players.each do |player| %>
     <div data-controller="players" data-player-id="<%= player.id %>">
       <%= render 'player', player: player %>
