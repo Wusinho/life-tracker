@@ -15,9 +15,9 @@
     <i class="fa-solid fa-meteor"></i>
   <% end %>
 
-  <%= turbo_stream_from 'players' %>
+  <%= turbo_stream_from dom_id @game %>
 
-<%= turbo_frame_tag 'players' do %>
+<%= turbo_frame_tag dom_id @game do %>
   <% @game.players.each do |player| %>
     <div data-controller="players" data-player-id="<%= player.id %>">
 
