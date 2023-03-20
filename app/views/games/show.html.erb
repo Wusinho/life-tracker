@@ -11,7 +11,11 @@
       <% end %>
     </div>
     <div class="col-sm">
+      <% if current_user.player.winner %>
+          <h2>WINNER</h2>
+      <%else %>
         <%= render 'kaboom', id: current_user.player.id %>
+      <% end %>
     </div>
     <div class="col-sm">
       <% if @game_owner %>

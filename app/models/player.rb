@@ -15,7 +15,10 @@ class Player < ApplicationRecord
 
     self.update(killer: current_user.id )
 
-    current_user.player.update(winner: true ) if current_user_won?(game, current_user)
+    return unless current_user_won?(game, current_user)
+
+    current_user.player.update(winner: true )
+    game.update(ended: true)
   end
 
   def current_user_won?(game ,current_user)

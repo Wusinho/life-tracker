@@ -1,30 +1,37 @@
 <div class="card" id="<%= dom_id player %>" style="width: 18rem;">
   <div class="card-body">
-    <div class="d-flex align-items-center">
-      <h5 class="card-title"><%= player.position%></h5>
-      <h5 class="card-title px-3"><%= player.user.nickname%></h5>
-      <%= render 'players/heal', id: player.id unless player.lives.zero? %>
-    </div>
+    <% if player.winner %>
+      <h2><%= player.user.nickname %> WON!!!!</h2>
+      <% else %>
 
-    <div class="container">
-      <div class="row">
-        <div class="col d-flex align-items-center justify-content-between p-0">
-          <% if player.lives.zero? %>
-            <p class="lives text-secondary">
-              <i class="fa-sharp fa-solid fa-ghost"></i>
-            </p>
+      <div class="d-flex align-items-center">
+        <h5 class="card-title"><%= player.position%></h5>
+        <h5 class="card-title px-3"><%= player.user.nickname%></h5>
+        <%= render 'players/heal', id: player.id unless player.lives.zero? %>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col d-flex align-items-center justify-content-between p-0">
+            <% if player.died? %>
+              <p class="lives text-secondary">
+                <i class="fa-sharp fa-solid fa-ghost"></i>
+              </p>
             <% else %>
-            <%= render 'players/damage_to', id: player.id %>
-            <%= render 'players/damage_to_enemies', id: player.id %>
-          <% end %>
-        </div>
-        <div class="col text-center">
-          <% unless player.lives.zero? %>
-            <p class="px-3 lives text-primary"><%= player.lives %> </p>
-          <% end %>
+              <%= render 'players/damage_to', id: player.id %>
+              <%= render 'players/damage_to_enemies', id: player.id %>
+            <% end %>
+          </div>
+          <div class="col text-center">
+            <% unless player.lives.zero? %>
+              <p class="px-3 lives text-primary"><%= player.lives %> </p>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+
+
+  <% end %>
 
   </div>
 </div>
