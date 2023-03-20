@@ -1,23 +1,16 @@
 
-  <%= turbo_stream_from dom_id current_user  %>
-
-  <%= turbo_frame_tag dom_id(current_user), class: 'house__container' do %>
+<div class="house__container">
     <% if @house %>
       <%= render @house %>
       <%= link_to '', edit_house_path(@house), class: edit_btn %>
     <% else %>
-      <%= turbo_frame_tag 'house_form' do %>
-        <%= render 'form', house: @new_house %>
-      <% end %>
+      <%= render 'form', house: @new_house %>
     <% end %>
+</div>
+
+  <% if current_user.not_active_game? %>
+    <%=  link_to 'Create Game', house_path(@house), class: green_btn  %>
+  <% else %>
+    <%= link_to 'Go to games', games_path %>
   <% end %>
 
-  <%= turbo_frame_tag 'create_game' %>
-
-  <% if @house && !current_user.active_game? %>
-    <%= link_to 'Create Game', house_path(@house), class: green_btn %>
-  <% end %>
-
-  <div>
-    <%= link_to 'Go to Games', games_path %>
-  </div>

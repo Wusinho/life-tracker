@@ -17,10 +17,11 @@ class HousesController < ApplicationController
     @house = current_user.build_house(house_params)
 
       if @house.save
-        respond_to do |format|
-          format.turbo_stream
-          format.html
-        end
+        redirect_to house_path(@house)
+        # respond_to do |format|
+        #   format.turbo_stream
+        #   format.html
+        # end
       else
         error_message(@house)
       end

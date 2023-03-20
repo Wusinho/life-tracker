@@ -7,9 +7,9 @@ class User < ApplicationRecord
   has_many :games
   has_one :player
 
-  def active_game?
-    return if self.house.games.empty?
-    self.house.games.find_by(ended: false).present?
+  def not_active_game?
+    return unless self.house&.games&.empty?
+    self.house.games.find_by(ended: false).blank?
   end
 
   def has_house?
