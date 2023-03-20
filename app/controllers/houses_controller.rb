@@ -4,8 +4,7 @@ class HousesController < ApplicationController
   before_action :set_creating_game, only: [:show ]
 
   def index
-    @new_house = House.new
-    @house = current_user.house
+    @house = current_user.house || House.new
   end
 
   def show
@@ -18,10 +17,6 @@ class HousesController < ApplicationController
 
       if @house.save
         redirect_to house_path(@house)
-        # respond_to do |format|
-        #   format.turbo_stream
-        #   format.html
-        # end
       else
         error_message(@house)
       end
@@ -39,8 +34,7 @@ class HousesController < ApplicationController
 
   def set_creating_game
     @game = Game.new
-    @users = User.all
-    @users.each { | user| @game.players.build(user_id: user.id) }
+    @users = User.all.each { | user| @game.players.build(user_id: user.id) }
   end
 
   def set_house
