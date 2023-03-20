@@ -16,3 +16,16 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "error_message";
+
+
+.kaboom{
+  font-size: 500px;
+}
+
+.lives {
+  font-size: 50px;
+}
+
+.damage_to, .damage_to_enemies, .heal {
+  font-size: 25px;
+}

@@ -1,26 +1,22 @@
 
-  <% if @game_owner %>
-  <%= button_to 'delete',
-            { controller: "games", action: "destroy", id: @game.id },
-            data: { confirm: 'Are you sure?' },
-            method: :delete,
-            class: red_btn %>
-  <% end %>
 
-  <%= link_to '', data: {
-                        controller: 'players',
-                        player_id: current_user.player.id,
-                        action: 'players#kaboom'
-  } do %>
-    <i class="fa-solid fa-meteor"></i>
-  <% end %>
 
-  <%= turbo_stream_from dom_id @game %>
 
-  <%= turbo_frame_tag dom_id @game do %>
-    <% @game.players.each do |player| %>
-      <div data-controller="players" data-player-id="<%= player.id %>">
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <%= turbo_stream_from dom_id @game %>
+      <%= turbo_frame_tag dom_id @game do %>
         <%= render @players %>
-      </div>
-    <% end %>
-  <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm">
+        <%= render 'kaboom', id: current_user.player.id %>
+    </div>
+    <div class="col-sm">
+      <% if @game_owner %>
+        <%= render 'delete_game' %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,36 +1,22 @@
 <div class="card" id="<%= dom_id player %>" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title"><%= player.user.nickname%></h5>
-    <h5 class="card-title"><%= player.position%></h5>
-
     <div class="d-flex">
-
-      <%= link_to '', data: {
-                            controller: 'players',
-                            player_id: player.id,
-                            action: 'players#damage_to'
-      } do %>
-        <i class="fa-solid fa-heart-crack"></i>
-      <% end %>
-
-      <p class="px-3"><%= player.lives %> </p>
-
-      <%= link_to '', data: {
-                            controller: 'players',
-                            player_id: player.id,
-                            action: 'players#heal'
-      } do %>
-        <i class="fa-solid fa-heart"></i>
-      <% end %>
-
+      <h5 class="card-title"><%= player.position%></h5>
+      <h5 class="card-title px-3"><%= player.user.nickname%></h5>
+      <%= render 'players/heal', id: player.id  %>
     </div>
 
-    <%= link_to '', data: {
-                          controller: 'players',
-                          player_id: player.id,
-                          action: 'players#damage_to_enemies'
-    } do %>
-      <i class="fa-solid fa-cloud-rain"></i>
-    <% end %>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <%= render 'players/damage_to', id: player.id %>
+          <%= render 'players/damage_to_enemies', id: player.id %>
+        </div>
+        <div class="col">
+           <p class="px-3 lives"><%= player.lives %> </p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
