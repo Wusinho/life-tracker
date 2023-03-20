@@ -9,16 +9,20 @@
 
   <%= link_to '', data: {
                         controller: 'players',
-                        player_id: current_user.id,
+                        player_id: current_user,
                         action: 'players#kaboom'
   } do %>
     <i class="fa-solid fa-meteor"></i>
   <% end %>
 
-<div id='players'>
-  <% @players.each do |player| %>
+  <%= turbo_stream_from 'players' %>
+
+<%= turbo_frame_tag 'players' do %>
+  <% @game.players.each do |player| %>
     <div data-controller="players" data-player-id="<%= player.id %>">
-      <%= render 'player', player: player %>
+
+      <%= render 'players/player', player: player %>
     </div>
   <% end %>
-</div>
+    <%#= render @players %>
+<% end %>

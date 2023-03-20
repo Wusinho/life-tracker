@@ -4,6 +4,7 @@ class Game < ApplicationRecord
   accepts_nested_attributes_for :players, allow_destroy: true, reject_if: :all_blank
 
   after_create :add_game
+  # after_update_commit { broadcast_update_to game, :players }
 
   def add_game
     self.players.each do |player|

@@ -1,6 +1,8 @@
-<div class="card" style="width: 18rem;">
+<div class="card" id="<%= dom_id player %>" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title"><%= player.user.nickname%></h5>
+    <h5 class="card-title"><%= player.position%></h5>
+
     <div class="d-flex">
 
       <%= link_to '', data: {

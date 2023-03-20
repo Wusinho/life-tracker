@@ -16,35 +16,24 @@ class PlayersController < ApplicationController
     @game.players.each do |player|
       next if player.user == current_user
 
-      player.decrement!(:lives)
+      player.update(lives: player.lives - 1)
     end
-    render json: {
-      player: @player,
-    }
   end
 
   def heal
-    @player.increment!(:lives)
-    render json: {
-      player: @player,
-      lives: @player.lives,
-      user: @player.user.nickname
-    }
+    @player.update(lives: @player.lives + 1)
+
   end
 
   def damage_to
-    @player.decrement!(:lives)
-    render json: {
-      player: @player,
-      lives: @player.lives,
-      user: @player.user.nickname
-    }
+    @player.update(lives: @player.lives - 1)
+
   end
 
   private
 
   def set_player
-    @player = Player.find_by(user_id: params[:id])
+    @player = Player.find(params[:id])
     @game = @player.game
   end
 end
