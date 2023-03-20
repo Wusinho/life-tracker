@@ -17,5 +17,5 @@ Rails.application.routes.draw do
     post :kaboom, on: :collection
   end
   # Defines the root path route ("/")
-  root "houses#index"
+  root "games#index"
 end
