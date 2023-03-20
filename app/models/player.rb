@@ -28,4 +28,8 @@ class Player < ApplicationRecord
     alive_players.first == current_user.player
   end
 
+  def nickname
+    self.user.nickname
+  end
+
 end
