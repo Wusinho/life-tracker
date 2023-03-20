@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_16_223856) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_20_230724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -44,6 +44,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_16_223856) do
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
+  create_table "user_kills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.string "deceased_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_kills_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "nickname", default: "fackin_noob"
     t.string "email", default: "", null: false
@@ -51,6 +59,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_16_223856) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "heal", default: 0
+    t.integer "harakiri", default: 0
+    t.integer "aoe", default: 0
+    t.integer "wins", default: 0
+    t.integer "total_games", default: 0
     t.boolean "online", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -62,4 +75,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_16_223856) do
   add_foreign_key "houses", "users"
   add_foreign_key "players", "games"
   add_foreign_key "players", "users"
+  add_foreign_key "user_kills", "users"
 end

@@ -8,12 +8,13 @@ class Player < ApplicationRecord
     self.lives.zero?
   end
 
-  def damage_analysis(current_user, game)
+  def damage_analysis(current_user, game, method)
+    user_stats(method)
     self.update(lives: self.lives - 1)
 
     return unless self.died?
 
-    self.update(killer: current_user.id )
+    UserKill.create(user_id: current_user.id, deceased_id: self.id)
 
     return unless current_user_won?(game, current_user)
 
@@ -30,6 +31,18 @@ class Player < ApplicationRecord
 
   def nickname
     self.user.nickname
+  end
+
+  def user_stats(method)
+    puts '*'*100
+    if method  == :damage_to_enemies
+      p 'damge to enemies !!!!!!!!!!'
+    elsif method == :damage_to
+      p 'damge to ONEEEEEEEEE !!!!!!!!!!'
+    else
+      p 'kabooooooooooooooooooooooom'
+    end
+    puts '*'*100
   end
 
 end

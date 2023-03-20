@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
     @game.players.each do |player|
       next if player.died?
 
-      player.damage_analysis(current_user, @game)
+      player.damage_analysis(current_user, @game, __method__)
     end
 
   end
@@ -14,7 +14,7 @@ class PlayersController < ApplicationController
     @game.players.each do |player|
       next if player.user == current_user || player.died?
 
-      player.damage_analysis(current_user, @game)
+      player.damage_analysis(current_user, @game, __method__)
     end
   end
 
@@ -23,7 +23,7 @@ class PlayersController < ApplicationController
   end
 
   def damage_to
-    @player.damage_analysis(current_user, @game)
+    @player.damage_analysis(current_user, @game, __method__)
   end
 
   private

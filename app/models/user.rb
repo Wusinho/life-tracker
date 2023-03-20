@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_one :house
   has_many :user_games, through: :house, source: :games
   has_one :player
-
+  has_many :user_kills
   validate :active_game?
 
   def active_game?
