@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :house
   has_many :games
+  has_one :player
 
   def active_game?
     return if self.house.games.empty?

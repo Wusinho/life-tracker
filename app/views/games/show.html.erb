@@ -9,7 +9,7 @@
 
   <%= link_to '', data: {
                         controller: 'players',
-                        player_id: current_user,
+                        player_id: current_user.player.id,
                         action: 'players#kaboom'
   } do %>
     <i class="fa-solid fa-meteor"></i>

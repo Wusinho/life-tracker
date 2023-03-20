@@ -3,18 +3,16 @@ class PlayersController < ApplicationController
 
   def kaboom
     @game.players.each do |player|
+      next if player.died?
 
-      player.decrement!(:lives)
+      player.update(lives: player.lives - 1)
     end
 
-    render json: {
-      player: current_user,
-    }
   end
 
   def damage_to_enemies
     @game.players.each do |player|
-      next if player.user == current_user
+      next if player.user == current_user || player.died?
 
       player.update(lives: player.lives - 1)
     end
