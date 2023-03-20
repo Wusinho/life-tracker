@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  # before_action :set_house, only: [:create]
+  before_action :authenticate_user!
   before_action :set_game, only: [:show, :show, :destroy]
   before_action :is_invited?, only: [:show]
 
