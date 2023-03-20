@@ -26,6 +26,14 @@
   font-size: 50px;
 }
 
-.damage_to, .damage_to_enemies, .heal {
+.damage_to, .damage_to_enemies, .dead {
+  font-size: 40px;
+}
+
+.damage_to_enemies {
+  color: purple;
+}
+
+.heal {
   font-size: 25px;
 }
