@@ -64,6 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_230724) do
     t.integer "aoe", default: 0
     t.integer "wins", default: 0
     t.integer "total_games", default: 0
+    t.integer "total_damage", default: 0
     t.boolean "online", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
