@@ -4,12 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one :house
-  has_many :games
+  has_many :user_games, through: :house, source: :games
   has_one :player
 
-  def not_active_game?
-    return unless self.house&.games&.empty?
-    self.house.games.find_by(ended: false).blank?
+  validate :active_game?
+
+  def active_game?
+    user_games.all? { |game| game.ended }
   end
 
   def has_house?

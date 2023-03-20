@@ -1,16 +1,18 @@
 
-<div class="house__container">
+<div >
     <% if @house.persisted? %>
-      <%= render @house %>
-      <%= link_to '', edit_house_path(@house), class: edit_btn %>
+       <div class="house__container">
+         <%= render @house %>
+         <%= link_to '', edit_house_path(@house), class: edit_btn %>
+       </div>
+         <% if current_user.active_game? %>
+           <%=  link_to 'Create Game', house_path(@house), class: green_btn  %>
+         <% else %>
+           <%= link_to 'Go to games', games_path %>
+         <%end %>
     <% else %>
       <%= render 'form', house: @house %>
     <% end %>
 </div>
 
-  <% if current_user.not_active_game? %>
-    <%=  link_to 'Create Game', house_path(@house), class: green_btn  %>
-  <% else %>
-    <%= link_to 'Go to games', games_path %>
-  <% end %>
 
