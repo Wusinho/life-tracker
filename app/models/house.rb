@@ -4,7 +4,7 @@ class House < ApplicationRecord
 
   validates_presence_of :name
 
-  after_create_commit{ broadcast_prepend_to 'houses'}
-  after_update_commit{ broadcast_prepend_to 'houses'}
+  after_create_commit{ broadcast_prepend_to "user_#{self.user.id}" }
+  after_update_commit{ broadcast_prepend_to "user_#{self.user.id}" }
 
 end

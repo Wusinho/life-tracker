@@ -1,7 +1,7 @@
 
-  <%= turbo_stream_from 'houses' %>
+  <%= turbo_stream_from dom_id current_user  %>
 
-  <%= turbo_frame_tag 'houses', class: 'house__container' do %>
+  <%= turbo_frame_tag dom_id(current_user), class: 'house__container' do %>
     <% if @house %>
       <%= render @house %>
       <%= link_to '', edit_house_path(@house), class: edit_btn %>

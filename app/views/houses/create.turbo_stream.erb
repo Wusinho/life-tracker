@@ -2,7 +2,7 @@
 
 <%= turbo_stream.remove "house_form" %>
 
-<%= turbo_stream.append 'houses' do %>
+<%= turbo_stream.append dom_id current_user do %>
   <%= render 'link', house: @house %>
  <% end %>
 
