@@ -33,7 +33,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
       t.integer :heal, default: 0
-      t.integer :harakiri, default: 0
       t.integer :aoe, default: 0
       t.integer :wins, default: 0
       t.integer :total_games, default: 0

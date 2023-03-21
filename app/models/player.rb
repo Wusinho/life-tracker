@@ -9,40 +9,33 @@ class Player < ApplicationRecord
   end
 
   def damage_analysis(current_user, game, method)
-    user_stats(method)
     self.update(lives: self.lives - 1)
+    user_stats(method, current_user)
 
     return unless self.died?
 
-    UserKill.create(user_id: current_user.id, deceased_id: self.id)
+    UserKill.create(user_id: current_user.id, deceased_id: self.user_id)
 
     return unless current_user_won?(game, current_user)
 
     current_user.player.update(winner: true )
+    current_user.increment!(:wins)
     game.update(ended: true)
   end
 
   def current_user_won?(game ,current_user)
-    alive_players = game.players.where.not(lives: 0)
-    return unless alive_players.count == 1
-
-    alive_players.first == current_user.player
+    debugger
+    all_enemies = game.players.where.not(user_id: current_user.id)
+    all_enemies.all? { |player| player.died? }
   end
 
   def nickname
     self.user.nickname
   end
 
-  def user_stats(method)
-    puts '*'*100
-    if method  == :damage_to_enemies
-      p 'damge to enemies !!!!!!!!!!'
-    elsif method == :damage_to
-      p 'damge to ONEEEEEEEEE !!!!!!!!!!'
-    else
-      p 'kabooooooooooooooooooooooom'
-    end
-    puts '*'*100
+  def user_stats(method, current_user)
+    current_user.increment!(:aoe) unless method  == :damage_to
+    current_user.increment!(:total_damage)
   end
 
 end

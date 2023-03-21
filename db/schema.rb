@@ -60,7 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_230724) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "heal", default: 0
-    t.integer "harakiri", default: 0
     t.integer "aoe", default: 0
     t.integer "wins", default: 0
     t.integer "total_games", default: 0

@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     post :damage_to, on: :collection
     post :kaboom, on: :collection
   end
+
+  resources :statistics, only: [:index]
+
   # Defines the root path route ("/")
   root "games#index"
 end

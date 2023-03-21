@@ -23,4 +23,8 @@ class User < ApplicationRecord
     self.house.games.where(id: game.id).present?
   end
 
+  def your_bitch
+    self.user_kills.tally.first
+  end
+
 end

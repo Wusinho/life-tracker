@@ -20,6 +20,7 @@ class PlayersController < ApplicationController
 
   def heal
     @player.update(lives: @player.lives + 1)
+    current_user.increment!(:heal)
   end
 
   def damage_to
