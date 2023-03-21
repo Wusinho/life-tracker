@@ -23,8 +23,14 @@ class User < ApplicationRecord
     self.house.games.where(id: game.id).present?
   end
 
-  def your_bitch
-    self.user_kills.tally.first
+
+
+  def user_killed_most
+    return if user_kills.empty?
+
+    users = self.user_kills.map { |players|  players.deceased }
+    users.pluck(:nickname).tally.sort_by { |h, k| k[1]  <=> h[1]  }
+
   end
 
 end

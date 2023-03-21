@@ -1,3 +1,5 @@
+
+
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title"> <%= user.nickname %></h5>
@@ -7,6 +9,8 @@
     <p class="card-text">Wins: <%=user.wins %></p>
     <p class="card-text">Total_games: <%=user.total_games %></p>
     <p class="card-text">Total damage<%=user.total_damage %></p>
+    <p class="card-text">Total <%= user.user_killed_most %></p>
 
+    <% user.user_killed_most %>
   </div>
 </div>

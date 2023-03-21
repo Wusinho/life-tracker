@@ -24,7 +24,6 @@ class Player < ApplicationRecord
   end
 
   def current_user_won?(game ,current_user)
-    debugger
     all_enemies = game.players.where.not(user_id: current_user.id)
     all_enemies.all? { |player| player.died? }
   end
