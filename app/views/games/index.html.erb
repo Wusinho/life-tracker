@@ -1,4 +1,5 @@
 
-<div data-controller="game" data-user-id="<%= current_user.id %>">
+<%= turbo_stream_from 'games' %>
+<div id="games">
   <%= render @games %>
 </div>
