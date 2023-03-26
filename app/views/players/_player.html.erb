@@ -3,7 +3,7 @@
 
     <% if player.winner %>
       <h2><%= player.nickname %> WON!!!!</h2>
-      <div style="width:100%;height:0;padding-bottom:59%;position:relative;"><iframe src="https://giphy.com/embed/CYFzxzmE2oDkI" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/animation-street-fighter-insert-coin-CYFzxzmE2oDkI">via GIPHY</a></p>
+      <%= render 'giff/win' %>
       <% else %>
 
       <div class="d-flex align-items-center">
@@ -15,13 +15,7 @@
       <div class="container">
         <div class="row">
           <% if player.died? %>
-
-          <div class="col d-flex align-items-center justify-content-between p-0">
-              <p class="lives text-secondary">
-            <div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/O9gUF8fJXgOZy" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/street-fighter-O9gUF8fJXgOZy">via GIPHY</a></p>
-<!--                <i class="fa-sharp fa-solid fa-ghost"></i>-->
-              </p>
-          </div>
+            <%= render 'giff/loose' %>
           <% else %>
             <div class="col d-flex align-items-center justify-content-between p-0">
               <%= render 'players/damage_to', id: player.id %>
