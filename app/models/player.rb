@@ -12,7 +12,7 @@ class Player < ApplicationRecord
     self.update(lives: self.lives - 1)
     user_stats(method, current_user)
 
-    update_player_active_status and return unless self.died?
+    update_player_active_status and return if self.died?
 
     UserKill.create(user_id: current_user.id, deceased_id: self.user_id)
 
