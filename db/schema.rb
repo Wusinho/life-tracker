@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_230724) do
     t.integer "position"
     t.boolean "winner", default: false
     t.integer "lives", default: 20
-    t.string "killer"
+    t.boolean "active", default: true
     t.uuid "user_id", null: false
     t.uuid "game_id", null: false
     t.datetime "created_at", null: false

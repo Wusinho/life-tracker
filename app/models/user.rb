@@ -5,12 +5,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :house
   has_many :user_games, through: :house, source: :games
-  has_one :player
+  has_many :players
   has_many :user_kills
   validate :active_game?
 
   def active_game?
     user_games.all? { |game| game.ended }
+  end
+
+  def player
+    self.players.find_by(active: true)
   end
 
   def has_house?

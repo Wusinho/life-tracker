@@ -12,15 +12,19 @@ class Player < ApplicationRecord
     self.update(lives: self.lives - 1)
     user_stats(method, current_user)
 
-    return unless self.died?
+    update_player_active_status and return unless self.died?
 
     UserKill.create(user_id: current_user.id, deceased_id: self.user_id)
 
     return unless current_user_won?(game, current_user)
 
-    current_user.player.update(winner: true )
+    current_user.player.update(winner: true, active: false )
     current_user.increment!(:wins)
     game.update(ended: true)
+  end
+
+  def update_player_active_status
+    self.update(active: false)
   end
 
   def current_user_won?(game ,current_user)

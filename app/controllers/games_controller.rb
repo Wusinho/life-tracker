@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   before_action :is_invited?, only: [:show]
 
   def index
-    @games = Game.all.where(ended: false)
+    @games = Game.active_games
   end
 
   def show
