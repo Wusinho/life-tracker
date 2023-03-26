@@ -2,16 +2,21 @@
   <div class="row">
     <div class="col">
       <%= turbo_stream_from dom_id @game %>
-      <%= turbo_frame_tag dom_id @game do %>
-        <%= render @players %>
-      <% end %>
+        <%= turbo_frame_tag dom_id @game do %>
+          <% @players.each do |player| %>
+            <div class="d-flex align-items-center">
+              <%= render 'players/player', player:player %>
+              <%= damage_to_enemies player, current_user %>
+            </div>
+          <% end %>
+        <% end %>
     </div>
     <div class="col">
-      <% if current_user.player.winner %>
-          <h2>WINNER</h2>
-      <%else %>
+      <%# if current_user.player.winner %>
+<!--          <h2>WINNER</h2>-->
+      <%#else %>
         <%= render 'kaboom', id: current_user.player.id %>
-      <% end %>
+      <%# end %>
     </div>
     <div class="col">
       <%= render 'delete_game' if @game_owner%>

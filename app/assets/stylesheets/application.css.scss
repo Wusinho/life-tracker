@@ -26,12 +26,18 @@
   font-size: 50px;
 }
 
-.damage_to, .damage_to_enemies, .dead {
+.damage_to, .dead {
   font-size: 40px;
 }
 
 .damage_to_enemies {
-  color: purple;
+  font-size: 80px;
+  margin-left: 20px;
+  border-radius:50%;
+  padding: 10px;
+  color: mediumpurple;
+  border: 1px solid ghostwhite;
+  text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em red;
 }
 
 .heal {

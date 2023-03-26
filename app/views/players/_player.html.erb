@@ -1,5 +1,6 @@
 <div class="card" id="<%= dom_id player %>" style="width: 18rem;">
   <div class="card-body">
+
     <% if player.winner %>
       <h2><%= player.nickname %> WON!!!!</h2>
       <% else %>
@@ -22,7 +23,6 @@
           <% else %>
             <div class="col d-flex align-items-center justify-content-between p-0">
               <%= render 'players/damage_to', id: player.id %>
-              <%= render 'players/damage_to_enemies', id: player.id %>
             </div>
           <div class="col text-center">
               <p class="px-3 lives text-primary"><%= player.lives %> </p>
