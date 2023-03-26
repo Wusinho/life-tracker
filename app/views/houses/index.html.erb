@@ -8,7 +8,7 @@
          <% if current_user.active_game? %>
            <%=  link_to 'Create Game', house_path(@house), class: green_btn  %>
          <% else %>
-           <%= link_to 'Go to games', games_path %>
+           <%= link_to 'Go to your game', game_path(current_user.game) %>
          <%end %>
     <% else %>
       <%= render 'form', house: @house %>

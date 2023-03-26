@@ -10,7 +10,11 @@ class User < ApplicationRecord
   validate :active_game?
 
   def active_game?
-    user_games.all? { |game| game.ended }
+    user_games.where(ended: false).count == 0
+  end
+
+  def game
+    user_games.find_by(ended: false)
   end
 
   def player
