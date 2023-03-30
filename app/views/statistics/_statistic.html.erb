@@ -9,9 +9,11 @@
     <p class="card-text">Wins: <%=user.wins %></p>
     <p class="card-text">Total_games: <%= user.total_games %></p>
     <p class="card-text">Total damage: <%= user.total_damage %></p>
-    <% if user.user_killed_most.present? %>
+    <p class="card-text">No of Killed players <%= user.no_kills %></p>
 
-      <% user.user_killed_most.each do |deceased| %>
+    <% if user.death_players.present? %>
+
+      <% user.death_players.each do |deceased| %>
         <p>name: <%= deceased[:nickname] %></p>
         <p>deads: <%= deceased[:deaths] %> </p>
       <% end %>

@@ -8,8 +8,20 @@ class User < ApplicationRecord
   has_many :players
   has_many :user_kills
   validate :active_game?
+  has_many :deaths, through: :user_kills, source: :deceased
 
   scope :order_wins, -> { order(wins: :desc)}
+
+  def death_players
+    deaths.tally.map { |user, count| { nickname: user.nickname, deaths: count } }
+          .sort_by { |h| -h[:deaths] }
+          .take(2)
+  end
+
+  def no_kills
+    deaths.length
+  end
+
 
   def active_game?
     user_games.where(ended: false).count == 0
