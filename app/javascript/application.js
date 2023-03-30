@@ -3,3 +3,5 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import 'bootstrap'
 import "channels"
+import "chartkick"
+import "Chart.bundle"

@@ -73,3 +73,4 @@ end
 gem 'bootstrap', '~> 5.1.3'
 gem 'devise', '~> 4.9'
 gem "font-awesome-sass", "~> 6.3.0"
+gem 'chartkick', '~> 5.0', '>= 5.0.1'
