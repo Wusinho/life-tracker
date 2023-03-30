@@ -12,8 +12,8 @@
     <% if user.user_killed_most.present? %>
 
       <% user.user_killed_most.each do |deceased| %>
-        <p>name: <%= deceased[0] %></p>
-        <p>deads: <%= deceased[1] %> </p>
+        <p>name: <%= deceased[:nickname] %></p>
+        <p>deads: <%= deceased[:deaths] %> </p>
       <% end %>
     <% end %>
   </div>

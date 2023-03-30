@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_230724) do
 
   create_table "user_kills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.string "deceased_id", null: false
+    t.uuid "deceased_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_kills_on_user_id"

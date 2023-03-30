@@ -36,11 +36,13 @@ class User < ApplicationRecord
 
 
   def user_killed_most
-    return if user_kills.empty?
+    return [] if user_kills.empty?
 
-    users = self.user_kills.map { |players|  players.deceased }
-    users.pluck(:nickname).tally.sort_by { |h, k| k[1]  <=> h[1]  }
+    users = self.user_kills.map { |players| players.deceased }
+    user_counts = users.tally
 
+    user_counts.map { |user, count| { nickname: user.nickname, deaths: count } }
+               .sort_by { |h| -h[:deaths] }
   end
 
 end
