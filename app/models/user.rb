@@ -8,19 +8,32 @@ class User < ApplicationRecord
   has_many :players
   has_many :user_kills
   validate :active_game?
-  has_many :deaths, through: :user_kills, source: :deceased
+  has_many :kills, through: :user_kills, source: :deceased
   has_many :games_played, through: :players, source: :game
 
-  scope :order_wins, -> { order(wins: :desc)}
+  scope :order_wins, -> { order(wins: :desc) }
 
-  def death_players
-    deaths.tally.map { |user, count| { nickname: user.nickname, deaths: count } }
-          .sort_by { |h| -h[:deaths] }
-          .take(2)
+  # def death_players
+  #   kills.tally.map { |user, count| { nickname: user.nickname, kills: count } }
+  #         .sort_by { |h| -h[:kills] }
+  #         .take(2)
+  # end
+
+  def win_rate
+    total_games_player = games_played.length
+    return 0 if total_games_player.zero?
+
+    wr = wins/total_games_player.to_f
+
+    { win: wr, lost: 1-wr }
   end
 
   def total_kills
-    deaths.length
+    kills.length
+  end
+
+  def death_players
+    kills.group(:nickname).count.sort_by { |h| -h[1] }.take(2)
   end
 
   def total_games_played
@@ -58,8 +71,8 @@ class User < ApplicationRecord
     users = self.user_kills.map { |players| players.deceased }
     user_counts = users.tally
 
-    user_counts.map { |user, count| { nickname: user.nickname, deaths: count } }
-               .sort_by { |h| -h[:deaths] }
+    user_counts.map { |user, count| { nickname: user.nickname, kills: count } }
+               .sort_by { |h| -h[:kills] }
   end
 
 end
