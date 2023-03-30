@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :user_kills
   validate :active_game?
 
+  scope :order_wins, -> { order(wins: :desc)}
+
   def active_game?
     user_games.where(ended: false).count == 0
   end

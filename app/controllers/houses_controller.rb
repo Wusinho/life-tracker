@@ -8,6 +8,7 @@ class HousesController < ApplicationController
   end
 
   def show
+    @users = User.all
   end
 
   def edit; end

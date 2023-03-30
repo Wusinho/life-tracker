@@ -6,12 +6,14 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 password = '123456'
+players = %w[zero vash wusinho terry retry volrath footman zambito]
 
-6.times do |i|
+
+players.each_with_index do |player, index|
   User.create(
-    email: "user_#{i}@gmail.com",
+    email: "user_#{index}@gmail.com",
     password: password,
     password_confirmation: password,
-    nickname: Faker::Fantasy::Tolkien.character + Faker::Fantasy::Tolkien.race
+    nickname: player
   )
 end

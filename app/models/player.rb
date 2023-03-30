@@ -20,11 +20,13 @@ class Player < ApplicationRecord
 
     current_user.player.update(winner: true, active: false )
     current_user.increment!(:wins)
+    current_user.increment!(:total_games)
     game.update(ended: true)
   end
 
   def update_player_active_status
     self.update(active: false)
+    self.user.increment!(:total_games)
   end
 
   def current_user_won?(game ,current_user)
