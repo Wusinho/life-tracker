@@ -4,11 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one :house
-  has_many :user_games, through: :house, source: :games
+  has_many :games_created, through: :house, source: :games
   has_many :players
   has_many :user_kills
   validate :active_game?
   has_many :deaths, through: :user_kills, source: :deceased
+  has_many :games_played, through: :players, source: :game
 
   scope :order_wins, -> { order(wins: :desc)}
 
@@ -18,17 +19,21 @@ class User < ApplicationRecord
           .take(2)
   end
 
-  def no_kills
+  def total_kills
     deaths.length
+  end
+
+  def total_games_played
+    games_played.length
   end
 
 
   def active_game?
-    user_games.where(ended: false).count == 0
+    games_created.where(ended: false).count == 0
   end
 
   def game
-    user_games.find_by(ended: false)
+    games_created.find_by(ended: false)
   end
 
   def player

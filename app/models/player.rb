@@ -14,7 +14,7 @@ class Player < ApplicationRecord
 
     return unless self.died?
     update_player_active_status
-    UserKill.create(user_id: current_user.id, deceased_id: self.user_id)
+    UserKill.create(user_id: current_user.id, deceased_id: self.user_id, game_id: self.game_id)
 
     return unless current_user_won?(game, current_user)
 
