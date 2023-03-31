@@ -2,6 +2,8 @@ class PlayersController < ApplicationController
   before_action :set_player, only: [:damage_to_enemies, :heal, :damage_to, :kaboom]
 
   def kaboom
+    return if @game.ended
+
     @game.players.each do |player|
       next if player.died?
 
@@ -11,6 +13,8 @@ class PlayersController < ApplicationController
   end
 
   def damage_to_enemies
+    return if @game.ended
+
     @game.players.each do |player|
       next if player.user == current_user || player.died?
 
@@ -30,9 +34,6 @@ class PlayersController < ApplicationController
   private
 
   def set_player
-    p '*'*100
-    p params
-    p '*'*100
     @player = Player.find(params[:id])
     @game = @player.game
   end
