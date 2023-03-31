@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   resources :statistics, only: [:index]
 
   # Defines the root path route ("/")
-  root "games#index"
+  root "statistics#index"
 end
