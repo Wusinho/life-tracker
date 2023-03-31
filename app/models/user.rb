@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :games_played, through: :players, source: :game
 
   scope :order_wins, -> { order(wins: :desc) }
+  scope :online_players, -> { where(online: true) }
 
   # def death_players
   #   kills.tally.map { |user, count| { nickname: user.nickname, kills: count } }
