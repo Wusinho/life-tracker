@@ -38,6 +38,7 @@ class GamesController < ApplicationController
 
   def set_game
     @game = Game.find(params['id'])
+    # redirect_to root_path unless @game
     @players = @game.players
   rescue
     redirect_to games_path

@@ -1,7 +1,3 @@
-<%= link_to '', data: {
-  controller: 'players',
-  player_id: id,
-  action: 'players#heal'
-}, class: 'heal text-success' do %>
-  <i class="fa-solid fa-heart"></i>
-<% end %>
+<%= button_to raw( "<i class='fa-solid fa-heart'></i>"),
+              heal_players_path({ id: id}),
+              class: green_btn %>

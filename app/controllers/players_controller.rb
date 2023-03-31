@@ -30,6 +30,9 @@ class PlayersController < ApplicationController
   private
 
   def set_player
+    p '*'*100
+    p params
+    p '*'*100
     @player = Player.find(params[:id])
     @game = @player.game
   end
