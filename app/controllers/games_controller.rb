@@ -40,6 +40,8 @@ class GamesController < ApplicationController
     @game = Game.find(params['id'])
     redirect_to root_path if @game.ended
     @players = @game.players
+  rescue
+  redirect_to root_path
   end
 
   def set_house
