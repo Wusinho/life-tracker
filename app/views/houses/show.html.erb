@@ -1,15 +1,22 @@
-Clickea para q no jueguen:
+<h2>Remove players from game</h2>
 
-<%= form_with model: @game do |form| %>
-      <%= form.fields_for :players do |f| %>
-        <li class="my-2">
-          <%= f.check_box :_destroy %>
-          <%= f.label f.object.user.nickname %>
-          <%= f.hidden_field :user_id, value: f.object.user_id %>
-          <%= f.select(:position, (1..@users.count).to_a) %>
-        </li>
-      <% end %>
+<%= form_with model: @game, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
+<!--  <template data-nested-form-target="template">-->
+    <%#= f.fields_for :players, Player.new, child_index: 'NEW_RECORD' do |player_fields| %>
+      <%#= render "player_form", f: player_fields %>
+    <%# end %>
+<!--  </template>-->
+<div class="card-group my-5">
+  <%= f.fields_for :players do |player_fields| %>
+    <%= render "player_form", f: player_fields %>
+  <% end %>
+</div>
+  <!-- Inserted elements will be injected before that target. -->
+<!--  <div data-nested-form-target="target"></div>-->
 
-  <%= form.submit class: blue_btn %>
-  <%= link_to 'Back', houses_path, class: blue_btn %>
+<!--  <button type="button" data-action="nested-form#add">Add Player</button>-->
+
+  <%= f.submit 'Save players', class: green_btn %>
 <% end %>
+
+<%= link_to 'Back', houses_path %>

@@ -1,0 +1,17 @@
+<div class="nested-form-wrapper" data-new-record="<%= dom_id Player.new %>">
+  <div class="card text-right" style="width: 18rem;">
+
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= f.object.user.nickname if f.object.user %>
+      </h5>
+
+      <%#= f.hidden_field :user_id, value: f.object.user_id %>
+      <%= f.hidden_field :user_id, value: :user_id %>
+
+      <button type="button" data-action="nested-form#remove" class="btn btn-danger">Remove Player</button>
+      <%= f.hidden_field :_destroy %>
+
+    </div>
+  </div>
+</div>
