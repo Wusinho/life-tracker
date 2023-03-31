@@ -22,9 +22,12 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def update_online_status(action)
-    current_user.update_attribute(:online, !current_user.online )
-    current_user.worker? ? broadcast_worker_status(action) : broadcast_employer_status(action)
+  def update_online_status
+      if params['action'] == 'destroy'
+        current_user.update(online: false)
+      else
+        current_user.update(online: true)
+      end
   end
 
 
