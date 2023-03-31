@@ -4,17 +4,49 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one :house
-  has_many :user_games, through: :house, source: :games
+  has_many :games_created, through: :house, source: :games
   has_many :players
   has_many :user_kills
   validate :active_game?
+  has_many :kills, through: :user_kills, source: :deceased
+  has_many :games_played, through: :players, source: :game
+
+  scope :order_wins, -> { order(wins: :desc) }
+
+  # def death_players
+  #   kills.tally.map { |user, count| { nickname: user.nickname, kills: count } }
+  #         .sort_by { |h| -h[:kills] }
+  #         .take(2)
+  # end
+
+  def win_rate
+    total_games_player = games_played.length
+    return 0 if total_games_player.zero?
+
+    wr = wins/total_games_player.to_f
+
+    { win: wr, lost: 1-wr }
+  end
+
+  def total_kills
+    kills.length
+  end
+
+  def death_players
+    kills.group(:nickname).count.sort_by { |h| -h[1] }.take(2)
+  end
+
+  def total_games_played
+    games_played.length
+  end
+
 
   def active_game?
-    user_games.where(ended: false).count == 0
+    games_created.where(ended: false).count == 0
   end
 
   def game
-    user_games.find_by(ended: false)
+    games_created.find_by(ended: false)
   end
 
   def player
@@ -34,11 +66,13 @@ class User < ApplicationRecord
 
 
   def user_killed_most
-    return if user_kills.empty?
+    return [] if user_kills.empty?
 
-    users = self.user_kills.map { |players|  players.deceased }
-    users.pluck(:nickname).tally.sort_by { |h, k| k[1]  <=> h[1]  }
+    users = self.user_kills.map { |players| players.deceased }
+    user_counts = users.tally
 
+    user_counts.map { |user, count| { nickname: user.nickname, kills: count } }
+               .sort_by { |h| -h[:kills] }
   end
 
 end

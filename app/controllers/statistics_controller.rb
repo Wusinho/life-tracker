@@ -1,5 +1,5 @@
 class StatisticsController < ApplicationController
   def index
-    @users = User.all
+    @users = User.order_wins.limit(5)
   end
 end

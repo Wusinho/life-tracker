@@ -2,15 +2,19 @@
 
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title"> <%= user.nickname %></h5>
-    <p class="card-text">AoE: <%=user.aoe %></p>
+    <h3 class="card-title"> <%= user.nickname %></h3>
+    <%= pie_chart user.win_rate %>
 
-    <p class="card-text">Heal: <%=user.heal %></p>
-    <p class="card-text">Wins: <%=user.wins %></p>
-    <p class="card-text">Total_games: <%=user.total_games %></p>
-    <p class="card-text">Total damage<%=user.total_damage %></p>
-    <p class="card-text">Total <%= user.user_killed_most %></p>
+<!--    <p class="card-text">AoE: <%#=user.aoe %></p>-->
 
-    <% user.user_killed_most %>
+<!--    <p class="card-text">Heal: <%#=user.heal %></p>-->
+<!--    <p class="card-text">Wins: <%#=user.wins %></p>-->
+<!--    <p class="card-text">Total_games: <%#= user.total_games %></p>-->
+<!--    <p class="card-text">Total damage: <%#= user.total_damage %></p>-->
+    <p class="card-text mt-4">Total Number of Kills <%= user.total_kills %></p>
+    <div>
+      <h5>Who is your bitch?</h5>
+      <%= bar_chart user.death_players, xtitle: "Kills" %>
+    </div>
   </div>
 </div>
