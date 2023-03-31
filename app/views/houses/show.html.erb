@@ -8,7 +8,7 @@
 <!--  </template>-->
 <div class="card-group my-5">
   <%= f.fields_for :players do |player_fields| %>
-    <%= render "player_form", f: player_fields %>
+    <%= render "player_form", size: @size, f: player_fields %>
   <% end %>
 </div>
   <!-- Inserted elements will be injected before that target. -->
