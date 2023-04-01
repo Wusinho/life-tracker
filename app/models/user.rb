@@ -20,7 +20,7 @@ class User < ApplicationRecord
   #         .take(2)
   # end
   def self.with_games
-    User.left_outer_joins(:players => :game).where("games.id IS NOT NULL").order('wins ASC').distinct
+    User.left_outer_joins(:players => :game).where("games.id IS NOT NULL").order('wins DESC').distinct
   end
 
   def win_rate
