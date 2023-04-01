@@ -50,6 +50,25 @@ class User < ApplicationRecord
     games_created.where(ended: false).count == 0
   end
 
+  def kills_per_game
+  hash = {}
+    kills = user_kills.group(:game_id).count
+    kills.each do |k,v|
+      g = Game.find(k)
+      d = g.created_at
+      hash[d] = v
+    end
+
+  hash.stringify_keys
+  end
+
+  def average_kills
+    kills = user_kills.group(:game_id).count
+    arr_kills = kills.values.reduce(&:+)
+
+    (arr_kills/kills.length.to_f).round(2)
+  end
+
   def games?
     self.games_played.present?
   end
