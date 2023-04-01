@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :online, :heal, :aoe, :wins, :total_games, :total_damage])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :online, :heal, :aoe, :wins, :total_damage])
   end
 
   def error_message(msg)

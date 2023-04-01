@@ -50,6 +50,10 @@ class User < ApplicationRecord
     games_created.where(ended: false).count == 0
   end
 
+  def find_last_player_updated
+    self.players.order(updated_at: :asc).first
+  end
+
   def kills_per_game
   hash = {}
     kills = user_kills.group(:game_id).count
