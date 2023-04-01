@@ -24,13 +24,26 @@ class User < ApplicationRecord
   end
 
   def win_rate
-    total_games_player = games_played.length
-    return nil if total_games_player.zero?
-
-    wr = wins/total_games_player.to_f
+    wr = win_rate_formula
+    return unless wr
 
     hash = { win: wr, lost: (1-wr).round(2) }
     hash.stringify_keys
+  end
+
+  def win_rate_formula
+    total_games_player = games_played.length
+    return nil if total_games_player.zero?
+
+    wins/total_games_player.to_f
+  end
+
+  def update_win_rate
+    self.update(win_rate: win_rate_formula&.round(2) )
+  end
+
+  def average_player_damage
+    players.average(:damage_done).to_f.round(2)
   end
 
   def total_kills
