@@ -22,11 +22,12 @@ class User < ApplicationRecord
 
   def win_rate
     total_games_player = games_played.length
-    return 0 if total_games_player.zero?
+    return nil if total_games_player.zero?
 
     wr = wins/total_games_player.to_f
 
-    { win: wr, lost: 1-wr }
+    hash = { win: wr, lost: (1-wr).round(2) }
+    hash.stringify_keys
   end
 
   def total_kills
@@ -44,6 +45,10 @@ class User < ApplicationRecord
 
   def active_game?
     games_created.where(ended: false).count == 0
+  end
+
+  def games?
+    self.games_played.present?
   end
 
   def game

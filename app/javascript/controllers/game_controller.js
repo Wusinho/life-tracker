@@ -4,8 +4,17 @@ import game from "../channels/game_channel";
 // Connects to data-controller="game"
 export default class extends Controller {
   connect() {
-    let container = this.element
-    const user_id = container.dataset.userId
-    game(user_id, container)
+    const ctx = this.element
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: JSON.parse(ctx.dataset.labels),
+        datasets: [{
+          label: 'Win rate',
+          data: JSON.parse(ctx.dataset.data),
+          borderWidth: 1
+        }]
+      },
+    });
   }
 }

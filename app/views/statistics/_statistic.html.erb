@@ -3,11 +3,20 @@
 <div class="card my-1" style="width: 18rem;">
   <div class="card-body">
     <h3 class="card-title"> <%= user.nickname %></h3>
-    <%= pie_chart user.win_rate %>
+    <% if user.games? %>
+       <canvas id="<%= dom_id user %>" data-controller="game"
+                    data-labels="<%= user.win_rate.keys %>"
+                    data-data="<%= user.win_rate.values %>"
+       ></canvas>
+    <% end %>
+    <div>
+
+    </div>
     <p class="card-text mt-4">Total Number of Kills <%= user.total_kills %></p>
     <div>
       <h5>Who is your bitch?</h5>
       <%= bar_chart user.death_players, xtitle: "Kills" %>
     </div>
   </div>
+  <%= link_to 'More Information', statistic_path(user)  %>
 </div>

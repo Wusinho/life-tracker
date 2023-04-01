@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     post :kaboom, on: :collection
   end
 
-  resources :statistics, only: [:index]
+  resources :statistics, only: [:index, :show]
 
   # Defines the root path route ("/")
   root "statistics#index"
