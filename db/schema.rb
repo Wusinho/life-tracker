@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_230724) do
 
   create_table "players", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "position"
+    t.integer "damage_done", default: 0
     t.boolean "winner", default: false
     t.integer "lives", default: 20
     t.boolean "active", default: true
