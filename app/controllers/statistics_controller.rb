@@ -1,7 +1,7 @@
 class StatisticsController < ApplicationController
   before_action :set_user, only: [:show]
   def index
-    @users = User.order_wins.limit(5)
+    @users = User.with_games.limit(5)
   end
 
   def show

@@ -19,6 +19,9 @@ class User < ApplicationRecord
   #         .sort_by { |h| -h[:kills] }
   #         .take(2)
   # end
+  def self.with_games
+    User.left_outer_joins(:players => :game).where("games.id IS NOT NULL").order('wins ASC').distinct
+  end
 
   def win_rate
     total_games_player = games_played.length
