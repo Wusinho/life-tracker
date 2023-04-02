@@ -69,11 +69,10 @@ class User < ApplicationRecord
 
   def kills_per_game
   hash = {}
+    all_games_played = self.games_played.pluck(:id, :created_at)
     kills = user_kills.group(:game_id).count
-    kills.each do |k,v|
-      g = Game.find(k)
-      d = g.created_at
-      hash[d] = v
+    all_games_played.each do |info|
+      kills[info.first] ? hash[info.last] = kills[info.first] : hash[info.last] = 0
     end
 
   hash.stringify_keys
