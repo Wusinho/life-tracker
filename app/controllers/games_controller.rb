@@ -13,13 +13,11 @@ class GamesController < ApplicationController
 
   def create
     @game = current_user.house.games.build(game_params_for_create)
+    redirect_to game_path @game if @game.save!
 
-      if @game.save
-        redirect_to game_path @game
-      else
-        render turbo_stream: error_message(@house)
-      end
-
+  rescue StandardError => error
+    debugger
+    rescue_msg(error)
   end
 
   def update
@@ -41,9 +39,10 @@ class GamesController < ApplicationController
 
   def set_game
     @game = Game.find(params['id'])
+    redirect_to root_path if @game.ended
     @players = @game.players
   rescue
-    redirect_to games_path
+  redirect_to root_path
   end
 
   def set_house

@@ -35,9 +35,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.integer :heal, default: 0
       t.integer :aoe, default: 0
       t.integer :wins, default: 0
-      t.integer :total_games, default: 0
+      t.float :win_rate, default: 0
       t.integer :total_damage, default: 0
-      t.boolean :online, default: false
+      t.boolean :online, default: true
       t.timestamps null: false
     end
 

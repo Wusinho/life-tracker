@@ -8,7 +8,6 @@ class HousesController < ApplicationController
   end
 
   def show
-    @users = User.all
   end
 
   def edit; end
@@ -35,7 +34,8 @@ class HousesController < ApplicationController
 
   def set_creating_game
     @game = Game.new
-    @users = User.all.each { | user| @game.players.build(user_id: user.id) }
+    @users = User.online_players.each { | user| @game.players.build(user_id: user.id) }
+    @size =  @users.length
   end
 
   def set_house

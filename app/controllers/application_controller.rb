@@ -4,20 +4,30 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :online, :heal, :aoe, :wins, :total_games, :total_damage])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :online, :heal, :aoe, :wins, :total_damage])
   end
 
+  def error_message(msg)
+    message = msg.instance_of?(String) ? msg : msg.errors.full_messages.to_sentence
+    render_turbo(message)
+  end
 
-  def error_message(house)
-    message = house.instance_of?(String) ? house : house.errors.full_messages.to_sentence
+  def rescue_msg(msg)
+    render_turbo(msg.message)
+  end
 
+  def render_turbo(message)
     render turbo_stream: turbo_stream.replace('error_message', partial: 'shared/error_message',
-                         locals: { message: message })
+                                              locals: { message: message })
   end
 
-  def update_online_status(action)
-    current_user.update_attribute(:online, !current_user.online )
-    current_user.worker? ? broadcast_worker_status(action) : broadcast_employer_status(action)
+
+  def update_online_status
+      if params['action'] == 'destroy'
+        current_user.update(online: false)
+      else
+        current_user.update(online: true)
+      end
   end
 
 

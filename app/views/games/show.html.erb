@@ -1,10 +1,13 @@
 <div class="p-2">
+  <div class="col mb-5">
+    <%= render 'delete_game' if @game_owner%>
+  </div>
   <div class="row">
     <div class="col">
       <%= turbo_stream_from dom_id @game %>
         <%= turbo_frame_tag dom_id @game do %>
           <% @players.each do |player| %>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center py-1">
               <%= render 'players/player', player:player %>
               <%= damage_to_enemies player, current_user %>
             </div>
@@ -12,10 +15,7 @@
         <% end %>
     </div>
     <div class="col">
-        <%= render 'kaboom', id: current_user.player.id %>
-    </div>
-    <div class="col">
-      <%= render 'delete_game' if @game_owner%>
+      <%= render 'kaboom', id: current_user.player.id %>
     </div>
   </div>
 </div>

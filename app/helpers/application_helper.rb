@@ -35,4 +35,20 @@ module ApplicationHelper
     'fa fa-edit px-2'
   end
 
+  def fist_icon
+    "<i class='fa-sharp fa-solid fa-hand-fist'></i>"
+  end
+
+  def heal_icon
+    "<i class='fa-solid fa-heart'></i>"
+  end
+
+  def kaboom_icon
+    "<i class='fa-solid fa-meteor'></i>"
+  end
+
+  def thunder_icon
+    "<i class='fa-solid fa-cloud-bolt'></i>"
+  end
+
 end

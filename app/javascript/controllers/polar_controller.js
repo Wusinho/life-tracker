@@ -1,19 +1,30 @@
 import { Controller } from "@hotwired/stimulus"
-import game from "../channels/game_channel";
 
-// Connects to data-controller="game"
+// Connects to data-controller="polar"
 export default class extends Controller {
   connect() {
     const ctx = this.element
     new Chart(ctx, {
-      type: 'doughnut',
+      type: 'polarArea',
       data: {
         labels: JSON.parse(ctx.dataset.labels),
         datasets: [{
-          label: 'Win rate',
+          label: 'All your kills',
           data: JSON.parse(ctx.dataset.data),
           borderWidth: 1
         }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'All your kills'
+          }
+        }
       },
     });
   }

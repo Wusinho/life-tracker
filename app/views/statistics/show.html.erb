@@ -1,0 +1,95 @@
+<div class="row bg-light pt-2">
+  <div class="col col-sm">
+    <div class="flex">
+      <div class="container">
+        <h4><%= @user.nickname %> Stats</h4>
+        <div class="stats__card row">
+
+          <div class="col">
+            <div class="d-flex">
+                <div class="">
+                  <i class="fa-solid fa-skull text-danger icons"></i>
+                </div>
+                <div class="p-1">
+                  <h5><%= @user.total_kills %> Total </h5>
+                  <p class="text-secondary">
+                    Player Kills
+                  </p>
+                </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="d-flex">
+              <div class="">
+                                <i class="fa-solid fa-chess-board icons text-warning"></i>
+              </div>
+              <div class="p-1">
+                <h5><%= @user.total_damage %> Damage</h5>
+                                <p class="text-secondary">
+                                  To Players
+                                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col">
+            <div class="d-flex">
+              <div class="">
+                                <i class='fa-solid fa-meteor icons text-primary'></i>
+
+              </div>
+              <div class="p-1">
+                <h5><%= @user.total_games_played %> Total</h5>
+                                <p class="text-secondary">
+                                  Games Played
+                                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+
+
+      <div>
+        <canvas id="<%= dom_id @user %>" data-controller="players"
+                data-labels="<%= format_date(@user.kills_per_game.keys) %>"
+                data-data="<%= @user.kills_per_game.values %>"
+        ></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col col-sm-4">
+    <div>
+      <h5>Average </h5>
+      <div>
+        <strong>
+        <span>Damage per Game: </span>
+        </strong>
+        <span><%=@user.average_damage_per_game %></span>
+      </div>
+      <div>
+        <strong>
+          <span>Kills per Game: </span>
+        </strong>
+        <span><%=@user.average_kill_per_game %></span>
+      </div>
+    </div>
+
+    <canvas data-controller="polar"
+            data-labels="<%= @user.display_polar.keys %>"
+            data-data="<%= @user.display_polar.values %>"
+    ></canvas>
+  </div>
+
+</div>
+
+
+
+
+<%= link_to 'Back', root_path %>

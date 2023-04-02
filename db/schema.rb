@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_230724) do
 
   create_table "players", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "position"
+    t.integer "damage_done", default: 0
     t.boolean "winner", default: false
     t.integer "lives", default: 20
     t.boolean "active", default: true
@@ -64,9 +65,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_230724) do
     t.integer "heal", default: 0
     t.integer "aoe", default: 0
     t.integer "wins", default: 0
-    t.integer "total_games", default: 0
+    t.float "win_rate", default: 0.0
     t.integer "total_damage", default: 0
-    t.boolean "online", default: false
+    t.boolean "online", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

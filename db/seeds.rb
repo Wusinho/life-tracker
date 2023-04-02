@@ -14,6 +14,7 @@ players.each_with_index do |player, index|
     email: "user_#{index}@gmail.com",
     password: password,
     password_confirmation: password,
-    nickname: player
+    nickname: player,
+    online: false
   )
 end

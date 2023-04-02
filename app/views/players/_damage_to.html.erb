@@ -1,7 +1,3 @@
-<%= link_to '', data: {
-  controller: 'players',
-  player_id: id,
-  action: 'players#damage_to'
-}, class: 'damage_to text-danger' do %>
-  <i class="fa-sharp fa-solid fa-hand-fist"></i>
-<% end %>
+<%= button_to raw(fist_icon),
+              damage_to_players_path({ id: id}),
+              class: red_btn %>
