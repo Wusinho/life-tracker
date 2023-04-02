@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :kills, through: :user_kills, source: :deceased
   has_many :games_played, through: :players, source: :game
 
-  scope :order_wins, -> { order(wins: :desc) }
+  scope :order_wins, -> { order(win_rate: :asc) }
   scope :online_players, -> { where(online: true) }
 
   # def death_players
@@ -20,7 +20,7 @@ class User < ApplicationRecord
   #         .take(2)
   # end
   def self.with_games
-    User.left_outer_joins(:players => :game).where("games.id IS NOT NULL").order('wins DESC').distinct
+    User.left_outer_joins(:players => :game).where("games.id IS NOT NULL").order('win_rate DESC').distinct
   end
 
   def win_rate_stats
