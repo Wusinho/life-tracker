@@ -16,6 +16,7 @@ class GamesController < ApplicationController
     redirect_to game_path @game if @game.save!
 
   rescue StandardError => error
+    debugger
     rescue_msg(error)
   end
 
