@@ -5,8 +5,8 @@
     <h3 class="card-title"> <%= user.nickname %></h3>
     <% if user.games? %>
        <canvas id="<%= dom_id user %>" data-controller="game"
-                    data-labels="<%= user.win_rate.keys %>"
-                    data-data="<%= user.win_rate.values %>"
+                    data-labels="<%= user.win_rate_stats.keys %>"
+                    data-data="<%= user.win_rate_stats.values %>"
        ></canvas>
     <% end %>
     <div>

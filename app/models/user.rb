@@ -23,8 +23,8 @@ class User < ApplicationRecord
     User.left_outer_joins(:players => :game).where("games.id IS NOT NULL").order('wins DESC').distinct
   end
 
-  def win_rate
-    wr = win_rate_formula
+  def win_rate_stats
+    wr = win_rate
     return unless wr
 
     hash = { win: wr, lost: (1-wr).round(2) }
