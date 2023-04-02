@@ -1,5 +1,5 @@
-<div class="row bg-light">
-  <div class="col">
+<div class="row bg-light pt-2">
+  <div class="col col-sm">
     <div class="flex">
       <div class="container">
         <h4><%= @user.nickname %> Stats</h4>
@@ -64,7 +64,29 @@
       </div>
     </div>
   </div>
-  <div class="col"></div>
+  <div class="col col-sm-4">
+    <div>
+      <h5>Average </h5>
+      <div>
+        <strong>
+        <span>Damage per Game: </span>
+        </strong>
+        <span><%=@user.average_damage_per_game %></span>
+      </div>
+      <div>
+        <strong>
+          <span>Kills per Game: </span>
+        </strong>
+        <span><%=@user.average_kill_per_game %></span>
+      </div>
+    </div>
+
+    <canvas data-controller="polar"
+            data-labels="<%= @user.display_polar.keys %>"
+            data-data="<%= @user.display_polar.values %>"
+    ></canvas>
+  </div>
+
 </div>
 
 

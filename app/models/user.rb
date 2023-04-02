@@ -51,11 +51,15 @@ class User < ApplicationRecord
   end
 
   def death_players
-    kills.group(:nickname).count.sort_by { |h| -h[1] }.take(2)
+    kills.group(:nickname).count.sort_by { |h| -h[1] }
   end
 
   def total_games_played
     games_played.length
+  end
+
+  def display_polar
+    death_players.to_h
   end
 
 
@@ -83,6 +87,18 @@ class User < ApplicationRecord
     arr_kills = kills.values.reduce(&:+)
 
     (arr_kills/kills.length.to_f).round(2)
+  end
+
+  def average_kill_per_game
+
+    total_kills = kills_per_game.map { |k,v| v}
+    return if total_kills.blank?
+
+    (total_kills.sum(0.0)/total_kills.size).round(2)
+  end
+
+  def average_damage_per_game
+    self.players.average(:damage_done).to_f.round(2)
   end
 
   def games?
