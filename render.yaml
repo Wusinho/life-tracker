@@ -1,9 +1,4 @@
 
-databases:
-  - name: lifeTracker
-    databaseName: lifeTracker
-    user: lifeTracker
-
 services:
     - type: web
       name: lifeTracker
