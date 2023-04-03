@@ -1,4 +1,3 @@
-    ipAllowList: []
 
 services:
     - type: web
