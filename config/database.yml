@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: magia_production
   username: magia
   password: <%= ENV["MAGIA_DATABASE_PASSWORD"] %>
