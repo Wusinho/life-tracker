@@ -4,6 +4,11 @@ databases:
     user: magicSd
 
 services:
+  - type: redis
+    name: cache
+    ipAllowList: [ ]
+    plan: free
+    maxmemoryPolicy: allkeys-lfu
   - type: web
     name: magicSd
     env: ruby
@@ -16,8 +21,8 @@ services:
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
-  - type: redis
-    name: redis
-    ipAllowList: [ ]
-    plan: free
-    maxmemoryPolicy: noeviction
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: cache
+          property: connectionString
