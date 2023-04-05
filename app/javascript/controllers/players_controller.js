@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-import create_players from "../channels/players_channel";
 
 // Connects to data-controller="players"
 export default class extends Controller {
