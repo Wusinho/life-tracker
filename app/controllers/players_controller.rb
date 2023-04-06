@@ -1,6 +1,13 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:damage_to_enemies, :heal, :damage_to, :kaboom]
 
+  def windows_close
+    return unless user_signed_in?
+
+    current_user.update(online: false)
+    reset_session
+  end
+
   def kaboom
     return if @game.ended
 

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :timeoutable, timeout_in:30.minutes
   has_one :house
   has_many :games_created, through: :house, source: :games
   has_many :players
@@ -19,6 +19,11 @@ class User < ApplicationRecord
   #         .sort_by { |h| -h[:kills] }
   #         .take(2)
   # end
+
+
+
+
+
   def self.with_games
     User.left_outer_joins(:players => :game).where("games.id IS NOT NULL").order('win_rate DESC').distinct
   end
