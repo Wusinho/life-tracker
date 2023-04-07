@@ -2,6 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   before_action :update_online_status, only: [:create, :destroy]
+  before_action :update_online_status, only: [:create, :destroy]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
