@@ -1,4 +1,4 @@
-<div class="card" id="<%= dom_id player %>" style="width: 18rem;">
+<div class="card <%= my_turn(player.my_turn) %>" id="<%= dom_id player %>" style="width: 18rem;">
   <div class="card-body">
 
     <% if player.winner %>
@@ -29,4 +29,8 @@
       </div>
     <% end %>
   </div>
+  <%= button_to 'pass',
+                pass_players_path({id: player.id}),
+                data: { turbo: false } ,
+                class: blue_btn %>
 </div>

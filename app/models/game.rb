@@ -10,6 +10,10 @@ class Game < ApplicationRecord
   after_create_commit { broadcast_prepend_to 'games'}
   after_destroy_commit { broadcast_remove_to 'games'}
 
+  def game_size
+    players.length
+  end
+
   def position_uniqueness
     all_positions = self.players
     sorted_positions = all_positions.map(&:position).sort

@@ -1,6 +1,18 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: [:damage_to_enemies, :heal, :damage_to, :kaboom]
+  before_action :set_player, only: [:damage_to_enemies, :heal, :damage_to, :kaboom, :pass]
 
+  def pass
+    @player.update(my_turn: false)
+
+    whose_turn = @game.game_size >= @player.position + 1 ?  @player.position + 1 : 1
+    p '*'*100
+    p whose_turn
+    player = @game.players.find_by(position: whose_turn)
+    p player
+    p '*'*100
+
+    player.update(my_turn: true)
+  end
   def windows_close
     return unless user_signed_in?
 

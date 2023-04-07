@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     post :heal, on: :collection
     post :damage_to, on: :collection
     post :kaboom, on: :collection
+    post :pass, on: :collection
   end
 
   get '/windows_close' => 'players#windows_close', :as => 'windows_close'
