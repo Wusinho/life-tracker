@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  before_action :update_online_status, only: [:create, :destroy]
+  before_action :update_online_status, only: [:destroy]
+  after_action :update_online_status, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
