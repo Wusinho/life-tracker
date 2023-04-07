@@ -1,12 +1,20 @@
 class Player < ApplicationRecord
   belongs_to :user
   belongs_to :game, dependent: :destroy
+  after_create :set_turn
 
   after_update_commit { broadcast_update_to "game_#{self.game.id}" }
 
   def died?
     self.lives.zero?
   end
+
+  def set_turn
+    return unless position == 1
+
+    self.update(my_turn: true)
+  end
+
 
   def damage_analysis(current_user, game, method)
     self.update(lives: self.lives - 1)
