@@ -14,8 +14,10 @@
 @keyframes error-slide-in {
   from {
     transform: translateX(50vw);
+    background-color: white;
   }
   to {
     transform: translateX(0);
+    background-color: red;
   }
 }
