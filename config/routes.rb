@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     post :kaboom, on: :collection
   end
 
+  get '/windows_close' => 'players#windows_close', :as => 'windows_close'
+
   resources :statistics, only: [:index, :show]
 
   # Defines the root path route ("/")
