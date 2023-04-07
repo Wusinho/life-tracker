@@ -7,4 +7,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: error-slide-in 2s;
+  animation-timing-function: ease;
+}
+
+@keyframes error-slide-in {
+  from {
+    transform: translateX(50vw);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
