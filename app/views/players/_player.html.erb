@@ -4,7 +4,7 @@
     <% if player.winner %>
       <h2><%= player.nickname %> WON!!!!</h2>
       <%= render 'giff/win' %>
-      <% else %>
+    <% else %>
 
       <div class="d-flex align-items-center">
         <h5 class="card-title"><%= player.position%></h5>
@@ -27,10 +27,14 @@
 
         </div>
       </div>
+
+      <% if player.my_turn %>
+        <%= button_to 'pass',
+                      pass_players_path({id: player.id}),
+                      class: blue_btn %>
+      <% end %>
+
     <% end %>
   </div>
-  <%= button_to 'pass',
-                pass_players_path({id: player.id}),
-                data: { turbo: false } ,
-                class: blue_btn %>
+
 </div>
