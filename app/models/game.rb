@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
   belongs_to :house
-  has_many :players, -> { order(position: :asc) }, dependent: :delete_all
+  has_many :players, -> { order(my_turn: :desc, position: :asc) }, dependent: :delete_all
   has_many :user_kills, dependent: :destroy
   accepts_nested_attributes_for :players, allow_destroy: true, reject_if: :all_blank
   validate :position_uniqueness
@@ -8,7 +8,12 @@ class Game < ApplicationRecord
 
   scope :active_games, -> { where(ended: false) }
   after_create_commit { broadcast_prepend_to 'games'}
+  after_update_commit { broadcast_prepend_to 'games'}
   after_destroy_commit { broadcast_remove_to 'games'}
+
+  def game_size
+    players.length
+  end
 
   def position_uniqueness
     all_positions = self.players

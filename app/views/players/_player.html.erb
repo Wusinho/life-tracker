@@ -1,10 +1,10 @@
-<div class="card" id="<%= dom_id player %>" style="width: 18rem;">
+<div class="card <%= my_turn(player.my_turn) %>" id="<%= dom_id player %>" style="width: 18rem;">
   <div class="card-body">
 
     <% if player.winner %>
       <h2><%= player.nickname %> WON!!!!</h2>
       <%= render 'giff/win' %>
-      <% else %>
+    <% else %>
 
       <div class="d-flex align-items-center">
         <h5 class="card-title"><%= player.position%></h5>
@@ -27,6 +27,14 @@
 
         </div>
       </div>
+
+      <% if player.my_turn %>
+        <%= button_to 'pass',
+                      pass_players_path({id: player.id}),
+                      class: blue_btn %>
+      <% end %>
+
     <% end %>
   </div>
+
 </div>
