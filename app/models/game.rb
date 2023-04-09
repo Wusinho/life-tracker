@@ -11,8 +11,33 @@ class Game < ApplicationRecord
   after_update_commit { broadcast_prepend_to 'games'}
   after_destroy_commit { broadcast_remove_to 'games'}
 
+  def alive_players
+    players.where.not(lives: 0)
+  end
+
   def game_size
     players.length
+  end
+
+  def next_player(current_player)
+    player = nil
+    position = current_player.position
+
+    all_players = alive_players
+
+    return alive_players.first if all_players.length == 1
+
+
+    total_players = game_size
+
+    until player
+      position += 1
+      position = 1 if position > total_players
+      found_player = all_players.where("position = ? AND lives > 0", position)
+      player = found_player if found_player.present?
+    end
+
+    player
   end
 
   def position_uniqueness

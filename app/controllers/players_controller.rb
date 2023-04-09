@@ -7,8 +7,9 @@ class PlayersController < ApplicationController
 
     @player.update(my_turn: false)
 
-    whose_turn = @game.game_size >= @player.position + 1 ?  @player.position + 1 : 1
-    player = @game.players.find_by(position: whose_turn)
+    player = @game.next_player(@player)
+    # whose_turn = @game.game_size >= @player.position + 1 ?  @player.position + 1 : 1
+    # player = @game.players.find_by(position: whose_turn)
     player.update(my_turn: true)
   end
 

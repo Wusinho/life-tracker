@@ -24,6 +24,9 @@ class Player < ApplicationRecord
     return unless self.died?
     update_player_active_status
     UserKill.create(user_id: current_user.id, deceased_id: self.user_id, game_id: self.game_id)
+    players_turn = game.next_player(self)
+    players_turn.update(my_turn: true) if players_turn
+
     self.user.update_win_rate
 
     return unless current_user_won?(game, current_user)
