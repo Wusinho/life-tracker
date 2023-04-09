@@ -41,6 +41,8 @@ class PlayersController < ApplicationController
   end
 
   def heal
+    return unless current_user.player
+
     @player.update(lives: @player.lives + 1)
     current_user.increment!(:heal)
   end

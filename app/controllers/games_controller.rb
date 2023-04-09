@@ -25,6 +25,7 @@ class GamesController < ApplicationController
   end
 
   def destroy
+    @game.players.destroy_all
     @game.destroy
     redirect_to games_path
   end

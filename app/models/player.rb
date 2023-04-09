@@ -17,6 +17,8 @@ class Player < ApplicationRecord
 
 
   def damage_analysis(current_user, game, method)
+    return unless current_user.player
+
     self.update(lives: self.lives - 1)
     current_user.player.increment!(:damage_done)
     user_stats(method, current_user)
