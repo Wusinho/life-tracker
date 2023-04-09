@@ -4,6 +4,7 @@ class PlayersController < ApplicationController
   def pass
     return if @game.ended
     return if @player != current_user.player
+    return if @player.died?
 
     @player.update(my_turn: false)
 

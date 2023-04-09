@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <% if player.my_turn %>
+      <% if player.my_turn == true && !player.died? %>
         <%= button_to 'pass',
                       pass_players_path({id: player.id}),
                       class: blue_btn %>
