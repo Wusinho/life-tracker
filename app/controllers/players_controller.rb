@@ -4,11 +4,11 @@ class PlayersController < ApplicationController
   def pass
     return if @game.ended
     return if @player != current_user.player
+    return if @player.died?
 
     @player.update(my_turn: false)
 
-    whose_turn = @game.game_size >= @player.position + 1 ?  @player.position + 1 : 1
-    player = @game.players.find_by(position: whose_turn)
+    player = @game.next_player(@player)
     player.update(my_turn: true)
   end
 
@@ -41,6 +41,8 @@ class PlayersController < ApplicationController
   end
 
   def heal
+    return unless current_user.player
+
     @player.update(lives: @player.lives + 1)
     current_user.increment!(:heal)
   end

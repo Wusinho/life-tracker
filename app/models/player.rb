@@ -17,6 +17,8 @@ class Player < ApplicationRecord
 
 
   def damage_analysis(current_user, game, method)
+    return unless current_user.player
+
     self.update(lives: self.lives - 1)
     current_user.player.increment!(:damage_done)
     user_stats(method, current_user)
@@ -25,6 +27,10 @@ class Player < ApplicationRecord
     update_player_active_status
     UserKill.create(user_id: current_user.id, deceased_id: self.user_id, game_id: self.game_id)
     self.user.update_win_rate
+    if current_user.player.died? && self.my_turn == false || self.died? && self.my_turn == true
+      players_turn = game.next_player(self)
+      players_turn.update(my_turn: true)
+    end
 
     return unless current_user_won?(game, current_user)
 

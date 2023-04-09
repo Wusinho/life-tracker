@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_game, only: [:show, :show, :destroy]
   before_action :is_invited?, only: [:show]
+  before_action :is_dead?, only: [:show]
 
   def index
     @games = Game.active_games
@@ -24,6 +25,7 @@ class GamesController < ApplicationController
   end
 
   def destroy
+    @game.players.destroy_all
     @game.destroy
     redirect_to games_path
   end
@@ -34,6 +36,13 @@ class GamesController < ApplicationController
     return if @players.find_by(user_id: current_user.id)
 
     error_message('You are not invited')
+  end
+
+  def is_dead?
+    player = @players.find_by(user_id: current_user.id)
+    return unless player.died?
+
+    error_message('You are dead')
   end
 
   def set_game
